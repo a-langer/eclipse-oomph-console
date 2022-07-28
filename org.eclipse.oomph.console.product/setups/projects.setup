@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:ProjectCatalog
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pde="http://www.eclipse.org/oomph/setup/pde/1.0"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    xmlns:workbench_1.0="http://www.eclipse.org/oomph/setup/workbench/1.0"
+    xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
+    name="custom.projects"
+    label="custom.projects">
+  <annotation
+      source="http://www.eclipse.org/oomph/setup/BrandingInfo">
+    <detail
+        key="imageURI">
+      <value>platform:/plugin/org.eclipse.oomph.setup.ui/icons/committers.png</value>
+    </detail>
+    <detail
+        key="siteURI">
+      <value>https://projects.eclipse.org/</value>
+    </detail>
+  </annotation>
+  <project href="https://raw.githubusercontent.com/eclipse/birt/master/build/org.eclipse.birt.releng/BIRT.setup#/"/>
+  <project href="http://git.eclipse.org/c/swtbot/org.eclipse.swtbot.git/plain/devtools/oomph/SWTBot.setup#/"/>
+  <project href="https://raw.githubusercontent.com/eclipse/mwe/master/releng/MWE.setup#/"/>
+  <project
+      name="bash.editor" 
+      label="bash.editor">
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Redirect Update Site">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="bashEditorUpdateSite"
+          defaultValue="https://de-jcup.github.io/update-site-eclipse-bash-editor/update-site/">
+      </setupTask>
+      <setupTask
+          xsi:type="setup:RedirectionTask"
+          sourceURL="https://de-jcup.github.io/update-site-eclipse-bash-editor/update-site/"
+          targetURL="${bashEditorUpdateSite}"/>
+      <description>Change Update Site, ex.: -DbashEditorUpdateSite=https://mysite/basheditor/</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Install Bash editor">
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="Bash editor features"
+          licenseConfirmationDisabled="true">
+        <requirement
+            name="de.jcup.basheditor.feature.group"
+            versionRange="0.0.0"/>
+        <repository
+            url="https://de-jcup.github.io/update-site-eclipse-bash-editor/update-site/"/>
+      </setupTask>
+      <setupTask
+          xsi:type="workbench_1.0:FileAssociationsTask">
+        <mapping
+            filePattern="*.bash"
+            defaultEditorID="de.jcup.basheditor.BashEditor"/>
+        <mapping
+            filePattern="*.sh"
+            defaultEditorID="de.jcup.basheditor.BashEditor"/>
+        <description>Association of editor with Bash files</description>
+      </setupTask>
+    </setupTask>
+    <stream name="master" label="master"/>
+    <description>Eclipse Bash Editor</description>
+  </project>
+  <logicalProjectContainer
+      xsi:type="setup:ProjectCatalog"
+      href="org.eclipse.setup#//@projectCatalogs[name='custom.projects']"/>
+  <description>Custom project catalog</description>
+</setup:ProjectCatalog>

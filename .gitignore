@@ -21,3 +21,21 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Dev dirs and files
+/workspace
+bin/
+target/
+state/
+*.local.launch
+Copy of *.launch
+*~
+~*.docx
+~*.pptx
+com.chronon.sb.browser.launcher.prefs
+Corel Auto-Preserve/
+.DS_Store
+*_copy*
+*_SAVE.*
+*.versionsBackup
+*.test
