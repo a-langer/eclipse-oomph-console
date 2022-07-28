@@ -1,10 +1,10 @@
 # Console Oomph Installer
 
+[![license](https://img.shields.io/badge/license-EPL2-brightgreen.svg)](https://github.com/a-langer/eclipse-oomph-console/blob/main/LICENSE "License of source code")
 [![p2](https://img.shields.io/badge/p2-latest-blue?style=flat)](https://alanger.jfrog.io/artifactory/eclipse-oomph-console/ "P2 plugin repository")
 [![marketplace](https://img.shields.io/badge/marketplace-latest-blue?style=flat)](https://marketplace.eclipse.org/content/console-oomph-installer "Eclipse marketplace")
-[![JitPack](https://img.shields.io/github/tag/a-langer/eclipse-oomph-console.svg?label=maven%20jitpack)](https://jitpack.io/#a-langer/eclipse-oomph-console "Maven repository for builds from source code")
+[![JitPack](https://jitpack.io/v/a-langer/eclipse-oomph-console.svg)](https://jitpack.io/#a-langer/eclipse-oomph-console "Maven repository for builds from source code")
 [![Maven](https://maven-badges.herokuapp.com/maven-central/com.github.a-langer/eclipse-oomph-console/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.a-langer/eclipse-oomph-console "Maven repository for stable builds")
-[![license](https://img.shields.io/badge/license-EPL2-brightgreen.svg)](https://github.com/a-langer/eclipse-oomph-console/blob/master/LICENSE "License of source code")
 
 Console version of Oomph installer (also called [Eclipse installer](https://wiki.eclipse.org/Eclipse_Installer)). Implements a headless installation mode from command line. This project base on patch [66353][1] of Mikael Karlback.
 
