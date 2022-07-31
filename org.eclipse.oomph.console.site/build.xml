@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:unless="ant:unless" xmlns:if="ant:if">
+    <taskdef name="http" classname="org.missinglink.ant.task.http.HttpClientTask"/>
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+    <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+
+    <target name="http-delete">
+        <http url="${artifactory.url}" 
+            method="DELETE" 
+            printRequest="false" 
+            printResponse="false" 
+            printRequestHeaders="false" 
+            printResponseHeaders="false" 
+            expected="204" 
+            failOnUnexpected="true">
+            <headers>
+                <header name="X-JFrog-Art-Api" value="${password}"/>
+            </headers>
+        </http>
+    </target>
+
+    <target name="http-put">
+        <http url="${artifactory.url}/${item}" 
+            method="PUT" 
+            printRequest="false" 
+            printResponse="false" 
+            printRequestHeaders="false" 
+            printResponseHeaders="false" 
+            expected="201" 
+            failOnUnexpected="true">
+            <headers>
+                <header name="X-JFrog-Art-Api" value="${password}"/>
+            </headers>
+            <entity file="${file}" binary="true"/>
+        </http>
+    </target>
+
+    <target name="p2-files" depends="http-delete">
+        <for param="file">
+            <path>
+                <fileset dir="${project.basedir}/target/repository" includes="**/*"/>
+            </path>
+            <sequential>
+                <propertyregex override="yes" property="item" input="@{file}" 
+                    regexp=".*${project.basedir}/target/repository/" replace=""/>
+                <antcall target="http-put">
+                    <param name="item" value="${item}"/>
+                    <param name="file" value="@{file}"/>
+                </antcall>
+            </sequential>
+        </for>
+    </target>
+
+</project>

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.a-langer</groupId>
@@ -13,6 +10,25 @@
     <artifactId>org.eclipse.oomph.console.site</artifactId>
     <version>1.3.0-SNAPSHOT</version>
     <packaging>eclipse-repository</packaging>
+
+    <properties>
+        <maven.antrun.plugin.version>3.1.0</maven.antrun.plugin.version>
+        <ant.http.version>93c752145e</ant.http.version>
+        <ant.contrib.version>1.0b3</ant.contrib.version>
+        <artifactory.url>https://alanger.jfrog.io/artifactory/eclipse-oomph-console</artifactory.url>
+    </properties>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
         <plugins>
             <plugin>
@@ -25,4 +41,57 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- 
+        mvn deploy -Poomph-p2 -o
+        mvn -pl org.eclipse.oomph.console.site -am deploy -Poomph-p2 -o
+    -->
+    <profiles>
+        <profile>
+            <id>oomph-p2</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>${maven.antrun.plugin.version}</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.github.antlibs</groupId>
+                                <artifactId>ant-http</artifactId>
+                                <version>${ant.http.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>ant-contrib</groupId>
+                                <artifactId>ant-contrib</artifactId>
+                                <version>${ant.contrib.version}</version>
+                                <exclusions>
+                                    <exclusion>
+                                        <groupId>ant</groupId>
+                                        <artifactId>ant</artifactId>
+                                    </exclusion>
+                                </exclusions>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>deploy-p2</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <property name="project.basedir" value="${project.basedir}" />
+                                        <ant antfile="${project.basedir}/build.xml" target="p2-files" />
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
