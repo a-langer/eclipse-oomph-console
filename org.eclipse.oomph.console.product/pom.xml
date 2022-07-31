@@ -10,7 +10,6 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>org.eclipse.oomph.console.product</artifactId>
-    <version>1.26.0-SNAPSHOT</version>
     <packaging>eclipse-repository</packaging>
     <url>https://git.eclipse.org/c/oomph/org.eclipse.oomph.git</url>
     <description>Eclipse Oomph Installer</description>

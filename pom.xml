@@ -225,6 +225,9 @@
 
     <!--
         mvn clean verify -Possrh -o
+        mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=1.0.0 -o
+        mvn clean deploy -Possrh,oomph-p2
+        mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=1.0.1.qualifier -o
     -->
     <profiles>
         <profile>
