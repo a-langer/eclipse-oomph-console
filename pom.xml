@@ -225,7 +225,6 @@
 
     <!--
         mvn clean verify -Possrh -o
-        https://wiki.eclipse.org/Tycho:How_to_deploy_to_a_Maven_repository
     -->
     <profiles>
         <profile>

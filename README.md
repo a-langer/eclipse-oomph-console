@@ -224,7 +224,7 @@ Oomph console plugin settings:
 * Oomph source code: [git][2], [patch headless mode][1].
 * Oomph docs: [Eclipse Oomph Authoring][4] and [Oomph Targlets][5].
 * Example of setups models: [default products][6], [default projects][7], [eclipsesource product][8], [oomph playground][9].
-* Tutorials: [Oomph basic tutorial][3], [Customized Eclipse IDE provisioning with Oomph][10], [Maven Tycho for building Eclipse plug-ins][10].
+* Tutorials: [Oomph basic tutorial][3], [Customized Eclipse IDE provisioning with Oomph][10], [Maven Tycho for building Eclipse plug-ins][11], [How to deploy to a Maven repository][12].
 
 ## Development environment
 
@@ -242,3 +242,4 @@ Oomph console plugin settings:
 [9]: https://github.com/nittka/oomph-playground
 [10]: https://www.vogella.com/tutorials/Oomph/article.html
 [11]: https://www.vogella.com/tutorials/EclipseTycho/article.html
+[12]: https://wiki.eclipse.org/Tycho:How_to_deploy_to_a_Maven_repository
