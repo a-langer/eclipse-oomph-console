@@ -90,7 +90,7 @@
         <formatter.maven.version>2.19.0</formatter.maven.version>
         <maven.compiler.version>3.10.0</maven.compiler.version>
         <maven.deploy.version>3.0.0</maven.deploy.version>
-        <nexus.staging.maven.version>1.6.8</nexus.staging.maven.version>
+        <nexus.staging.maven.version>1.6.13</nexus.staging.maven.version>
         <maven.gpg.version>3.0.1</maven.gpg.version>
     </properties>
 
