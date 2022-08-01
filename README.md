@@ -4,13 +4,13 @@
 [![p2](https://img.shields.io/badge/p2-latest-blue?style=flat)](https://alanger.jfrog.io/artifactory/eclipse-oomph-console/ "P2 plugin repository")
 [![marketplace](https://img.shields.io/badge/marketplace-latest-blue?style=flat)](https://marketplace.eclipse.org/content/console-oomph-installer "Eclipse marketplace")
 [![JitPack](https://jitpack.io/v/a-langer/eclipse-oomph-console.svg)](https://jitpack.io/#a-langer/eclipse-oomph-console "Maven repository for builds from source code")
-[![Maven](https://maven-badges.herokuapp.com/maven-central/com.github.a-langer/eclipse-oomph-console/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.a-langer/eclipse-oomph-console "Maven repository for stable builds")
+[![Maven](https://maven-badges.herokuapp.com/maven-central/com.github.a-langer/org.eclipse.oomph.console.product/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.a-langer/org.eclipse.oomph.console.product "Maven repository for stable builds")
 
 Console version of Oomph installer (also called [Eclipse installer](https://wiki.eclipse.org/Eclipse_Installer)). Implements a headless installation mode from command line. This project base on patch [66353][1] of Mikael Karlback.
 
 Available solutions:
 
-* [Standalone Oomph console installer](https://mvnrepository.com/artifact/com.github.a-langer/org.eclipse.oomph.console.product) (plain Oomph with console plugin installed).
+* [Standalone Oomph console installer](https://search.maven.org/search?q=a:org.eclipse.oomph.console.product) (plain Oomph with console plugin installed).
 * [Oomph console plugin for Eclipse](https://marketplace.eclipse.org/content/console-oomph-installer) (can be installed on any Eclipse product from [p2 repository](https://alanger.jfrog.io/artifactory/eclipse-oomph-console/)).
 
 Typical use cases:
