@@ -176,7 +176,7 @@ Oomph console plugin settings:
   -Doomph.workspace.location.birt="$PWD/birt-workspace"
   ```
 
-* `oomph.redirection.setups` - location of primary setup model (should contain org.eclipse.setup file), will be added to eclipse.ini as "oomph.redirection.index.redirection", ex.:
+* `oomph.redirection.setups` - location of basic setup model (contain org.eclipse.setup file), will be added to eclipse.ini as "oomph.redirection.index.redirection", ex.:
 
   ```bash
   # Setup model from URL
@@ -185,16 +185,16 @@ Oomph console plugin settings:
   -Doomph.redirection.setups="index:/->$PWD/my-custom-setups/"
   ```
 
-* `oomph.redirection.*` - location of secondary setup models (should contain org.eclipse.setup files), uses for override primary setup model location, ex.:
+* `oomph.redirection.*` - location of additional setup model (also contain org.eclipse.setup file), uses for override basic setup model location, ex.:
 
   ```bash
-  # Primary setup model location
+  # Basic setup model location
   -Doomph.redirection.setups="index:/->http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/"
-  # Secondary setup model location (overrides product and project catalog)
+  # Additional setup model location (overrides product and project catalog)
   -Doomph.redirection.setupsDir="index:/->$PWD/my-custom-setups/"
   ```
 
-* `setup.p2.agent` (string, default null) - use shared pool location for features/plugins, ex.:
+* `setup.p2.agent` (string, default null) - directory location of shared pool for features/plugins, ex.:
 
   ```bash
   # From command line
