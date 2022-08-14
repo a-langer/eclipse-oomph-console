@@ -144,17 +144,6 @@ public class ConsoleInstaller {
 
         Trigger trigger = Trigger.getByName(Parameters.TRIGGER);
         performer = SetupTaskPerformer.create(uriConverter, prompter, trigger, context, false);
-        File installationLocation = performer.getInstallationLocation();
-        if (this.launch && installationLocation.exists()) {
-            try {
-                LaunchUtil.launchProduct(performer, false);
-                return;
-            } catch (IOException | NullPointerException e) {
-                System.out.println("Old installation did probably not finish correctly...");
-                System.out.println("Reinstalling");
-            }
-        }
-        saveResources();
 
         performer.recordVariables(context.getInstallation(), context.getWorkspace(), context.getUser());
         if (Parameters.CLEAN_UNRESOLVED)
@@ -167,6 +156,18 @@ public class ConsoleInstaller {
         performer.setOffline(Parameters.SETUP_OFFLINE);
         performer.setMirrors(Parameters.SETUP_MIRRORS);
         performer.setSkipConfirmation(true);
+
+        File installationLocation = performer.getInstallationLocation();
+        if (this.launch && installationLocation.exists()) {
+            try {
+                LaunchUtil.launchProduct(performer, false);
+                return;
+            } catch (IOException | NullPointerException e) {
+                System.out.println("Old installation did probably not finish correctly...");
+                System.out.println("Reinstalling");
+            }
+        }
+        saveResources();
 
         try {
             performer.perform(new ConsoleProgressMonitor(this.verbose));
@@ -206,12 +207,7 @@ public class ConsoleInstaller {
     private void init(String productId, String versionId, String projectID) throws NotFoundException {
         InstallationInitializer installationHelper = new InstallationInitializer();
         resourceSet = installationHelper.getResourceSet();
-        try {
-            initInstallation(productId, versionId, projectID);
-        } catch (NotFoundException e) {
-            System.out.println(e.getMessage());
-            System.exit(0);
-        }
+        initInstallation(productId, versionId, projectID);
     }
 
     private void initInstallation(String productId, String versionId, String projectId) throws NotFoundException {

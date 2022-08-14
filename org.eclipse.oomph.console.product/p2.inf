@@ -1,7 +1,7 @@
 # https://wiki.eclipse.org/Equinox/p2/Engine/Touchpoint_Instructions_35
 instructions.configure=\
   setProgramProperty(propName:eclipse.log.include.commandline,propValue:false);\
-  setProgramProperty(propName:eclipse.p2.max.threads,propValue:10);\
+  setProgramProperty(propName:eclipse.p2.max.threads,propValue:2);\
   setProgramProperty(propName:eclipse.p2.unsignedPolicy,propValue:allow);\
   setProgramProperty(propName:eclipse.p2.certificatePolicy,propValue:allow);\
   setProgramProperty(propName:org.eclipse.update.reconcile,propValue:false);\
@@ -13,4 +13,5 @@ instructions.configure=\
   setProgramProperty(propName:oomph.setup.ecf.read.timeout,propValue:60000);\
   setProgramProperty(propName:oomph.setup.ecf.connect.timeout,propValue:60000);\
   addProgramArg(programArg:-nosplash);\
+  addProgramArg(programArg:--launcher.suppressErrors);\
   org.eclipse.equinox.p2.touchpoint.natives.copy(source:org.eclipse.oomph.console.product/setups,target:${installFolder}/setups,overwrite:true);

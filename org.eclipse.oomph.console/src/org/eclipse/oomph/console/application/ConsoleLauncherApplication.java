@@ -9,7 +9,7 @@ import org.eclipse.oomph.console.installer.ConsoleInstaller;
 
 public class ConsoleLauncherApplication extends AbstractLauncherApplication {
     @Override
-    public void run() {
+    public void run() throws Exception {
         long startTime = System.currentTimeMillis();
         try {
             for (String product : Arrays.asList(Parameters.PRODUCT.split(","))) {
@@ -17,12 +17,13 @@ public class ConsoleLauncherApplication extends AbstractLauncherApplication {
                     ConsoleInstaller installer = new ConsoleInstaller(product);
                     installer.run();
                 } catch (Exception e) {
-                    System.out.println("Installation " + product + " failed");
+                    System.err.println("Installation " + product + " failed");
                     if (Parameters.VERBOSE) {
                         e.printStackTrace();
                     } else {
                         System.err.println(e.getMessage());
                     }
+                    throw e;
                 }
             }
         } finally {

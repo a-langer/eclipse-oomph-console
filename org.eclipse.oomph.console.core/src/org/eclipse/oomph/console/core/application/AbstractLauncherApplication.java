@@ -50,7 +50,7 @@ public abstract class AbstractLauncherApplication implements IApplication {
         return null;
     }
 
-    public abstract void run();
+    public abstract void run() throws Exception;
 
     private void initBundlePool() {
         String customBundlePoolLocation = System.getProperty("setup.p2.agent");
