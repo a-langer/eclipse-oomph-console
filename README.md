@@ -101,7 +101,7 @@ Typical use cases:
 
 ## Settings
 
-Oomph console plugin settings:
+The Console Oomph Installer settings (see also [Eclipse runtime options](https://help.eclipse.org/latest/topic/org.eclipse.platform.doc.isv/reference/misc/runtime-options.html)):
 
 * `oomph.product.id` (string, default `null`) - identifier of product in setup model, ex.:
 
