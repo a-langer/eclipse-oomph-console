@@ -1,3 +1,5 @@
 before_install:
   - sdk install java 17.0.4-librca
   - sdk use java 17.0.4-librca
+env:
+  MAVEN_OPTS: "-Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true"
