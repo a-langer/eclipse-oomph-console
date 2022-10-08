@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Core Console Oomph Plugin
 Bundle-SymbolicName: org.eclipse.oomph.console.core
-Bundle-Version: 1.0.1.qualifier
+Bundle-Version: 1.0.1
 Bundle-Activator: org.eclipse.oomph.console.core.Activator
 Bundle-Vendor: com.github.a-langer
 Require-Bundle: org.eclipse.ui,
