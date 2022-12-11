@@ -20,6 +20,21 @@ Typical use cases:
 
 ## Supported features and examples of usage
 
+* Use a console version of oomph installer; you can download it either from [Standalone Oomph console installer](https://search.maven.org/search?q=a:org.eclipse.oomph.console.product) (choose the appropriate download for your target platform) or with mvn command. This eclipse installer is provided with `org.eclipse.oomph.console.application` application to handle command line installations:
+
+  ```bash
+  # Check oomph console version
+  # Linux
+  mvn dependency:copy -Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:1.0.1:tar.gz:linux.gtk.x86_64 -DoutputDirectory=.
+  # MacOS x86_64
+  #mvn dependency:copy -Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:1.0.1:tar.gz:macosx.cocoa.x86_64 -DoutputDirectory=.
+  # Windows
+  #mvn dependency:copy -Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:1.0.1:tar.gz:win32.win32.x86_64 -DoutputDirectory=.
+  
+  tar -xzf org.eclipse.oomph.console.product-*.tar.gz
+  cd eclipse-installer/
+  ```
+
 * Install Eclipse [product][6] such as "Eclipse IDE for Java Developers" or "Eclipse IDE for PHP Developers", ex.:
 
   ```bash
