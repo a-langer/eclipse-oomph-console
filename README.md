@@ -25,14 +25,17 @@ Typical use cases:
   ```bash
   # Check oomph console version
   # Linux
-  mvn dependency:copy -Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:1.0.1:tar.gz:linux.gtk.x86_64 -DoutputDirectory=.
+  mvn org.apache.maven.plugins:maven-dependency-plugin:3.3.0:unpack -Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:LATEST:tar.gz:linux.gtk.x86_64 -DoutputDirectory=./ -Dproject.basedir=./
   # MacOS x86_64
-  #mvn dependency:copy -Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:1.0.1:tar.gz:macosx.cocoa.x86_64 -DoutputDirectory=.
-  # Windows
-  #mvn dependency:copy -Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:1.0.1:tar.gz:win32.win32.x86_64 -DoutputDirectory=.
+  mvn org.apache.maven.plugins:maven-dependency-plugin:3.3.0:unpack -Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:LATEST:tar.gz:macosx.cocoa.x86_64 -DoutputDirectory=./ -Dproject.basedir=./
+  # Windows (powershell)
+  mvn "org.apache.maven.plugins:maven-dependency-plugin:3.3.0:unpack" "-Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:LATEST:zip:win32.win32.x86_64" "-DoutputDirectory=./" "-Dproject.basedir=./"
   
-  tar -xzf org.eclipse.oomph.console.product-*.tar.gz
-  cd eclipse-installer/
+  # Linux/MacOS binary
+  ./eclipse-installer/eclipse-inst
+  # Windows binary
+  ./eclipse-instc.exe
+  # Following examples may suit a default unix shell; adapt command and argument quoting as needed by your platform/shell
   ```
 
 * Install Eclipse [product][6] such as "Eclipse IDE for Java Developers" or "Eclipse IDE for PHP Developers", ex.:
