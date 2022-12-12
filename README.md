@@ -20,6 +20,24 @@ Typical use cases:
 
 ## Supported features and examples of usage
 
+* Use a console version of oomph installer; you can download it either from [Standalone Oomph console installer](https://search.maven.org/search?q=a:org.eclipse.oomph.console.product) (choose the appropriate download for your target platform) or with mvn command. This eclipse installer is provided with `org.eclipse.oomph.console.application` application to handle command line installations:
+
+  ```bash
+  # Check oomph console version
+  # Linux
+  mvn org.apache.maven.plugins:maven-dependency-plugin:3.3.0:unpack -Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:LATEST:tar.gz:linux.gtk.x86_64 -DoutputDirectory=./ -Dproject.basedir=./
+  # MacOS x86_64
+  mvn org.apache.maven.plugins:maven-dependency-plugin:3.3.0:unpack -Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:LATEST:tar.gz:macosx.cocoa.x86_64 -DoutputDirectory=./ -Dproject.basedir=./
+  # Windows (powershell)
+  mvn "org.apache.maven.plugins:maven-dependency-plugin:3.3.0:unpack" "-Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:LATEST:zip:win32.win32.x86_64" "-DoutputDirectory=./" "-Dproject.basedir=./"
+  
+  # Linux/MacOS binary
+  ./eclipse-installer/eclipse-inst
+  # Windows binary
+  ./eclipse-instc.exe
+  # Following examples may suit a default unix shell; adapt command and argument quoting as needed by your platform/shell
+  ```
+
 * Install Eclipse [product][6] such as "Eclipse IDE for Java Developers" or "Eclipse IDE for PHP Developers", ex.:
 
   ```bash
