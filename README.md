@@ -203,13 +203,24 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
   -Doomph.redirection.setups="index:/->$PWD/my-custom-setups/"
   ```
 
-* `oomph.redirection.*` - location of additional setup model (also contain org.eclipse.setup file), uses for override basic setup model location, ex.:
+* `oomph.redirection.*` overrides - location of additional setup model (also contain org.eclipse.setup file), uses for override basic setup model location, ex.:
 
   ```bash
   # Basic setup model location
   -Doomph.redirection.setups="index:/->http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/"
   # Additional setup model location (overrides product and project catalog)
   -Doomph.redirection.setupsDir="index:/->$PWD/my-custom-setups/"
+  ```
+
+* `oomph.redirection.*` additions - location of additional setup model (without org.eclipse.setup file), uses to provides you own setup without altering eclipse oomph base setup (redirect empty redirectable.products.setup and/or redirectable.projects.setup from default config to you own definitions):
+
+  ```bash
+  # Basic setup model location
+  -Doomph.redirection.setups="index:/->http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/"
+  # Additional products setup models location
+  -Doomph.redirection.productsDir="index:/redirectable.products.setup->$PWD/my-custom-products/products.setup"
+  # Additional projects setup models location
+  -Doomph.redirection.projectsDir="index:/redirectable.projects.setup->$PWD/my-custom-projects/projects.setup"
   ```
 
 * `setup.p2.agent` (string, default null) - directory location of shared pool for features/plugins, ex.:
