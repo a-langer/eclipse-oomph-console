@@ -7,7 +7,7 @@ instructions.configure=\
   setProgramProperty(propName:org.eclipse.update.reconcile,propValue:false);\
   setProgramProperty(propName:org.eclipse.epp.logging.aeri.skipReports,propValue:true);\
   setProgramProperty(propName:oomph.p2.pool,propValue:@none);\
-  setProgramProperty(propName:oomph.p2.repository.retry,propValue:2);\
+  setProgramProperty(propName:oomph.p2.repository.retry,propValue:0);\
   setProgramProperty(propName:oomph.setup.stats.skip,propValue:true);\
   setProgramProperty(propName:oomph.setup.questionnaire.skip,propValue:true);\
   setProgramProperty(propName:oomph.setup.ecf.read.timeout,propValue:60000);\
