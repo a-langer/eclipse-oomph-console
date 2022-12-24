@@ -42,8 +42,8 @@
     </build>
 
     <!-- 
-        mvn deploy -Poomph-p2 -o
-        mvn -pl org.eclipse.oomph.console.site -am deploy -Poomph-p2 -o
+        mvn deploy -Poomph-p2 -DskipTests -o
+        mvn -pl org.eclipse.oomph.console.site -am deploy -Poomph-p2 -DskipTests -o
     -->
     <profiles>
         <profile>

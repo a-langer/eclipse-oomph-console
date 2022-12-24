@@ -82,7 +82,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.release>8</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tycho.version>2.6.0</tycho.version>
+        <tycho.version>2.7.5</tycho.version>
         <jarsigner.version>1.3.2</jarsigner.version>
         <maven.source.version>3.2.1</maven.source.version>
         <maven.resources.version>3.2.0</maven.resources.version>
@@ -95,9 +95,9 @@
     </properties>
 
     <!--
-        mvn clean install
-        mvn -pl org.eclipse.oomph.console.tp,org.eclipse.oomph.console.core,org.eclipse.oomph.console -am clean package -o
-        mvn -pl org.eclipse.oomph.console.product -am clean package -o
+        mvn clean install -DskipTests
+        mvn -pl org.eclipse.oomph.console.tp,org.eclipse.oomph.console.core,org.eclipse.oomph.console -am clean package -DskipTests -o
+        mvn -pl org.eclipse.oomph.console.product -am clean package -DskipTests -o
     -->
     <modules>
         <module>org.eclipse.oomph.console</module>
@@ -224,9 +224,9 @@
     </build>
 
     <!--
-        mvn clean verify -Possrh -o
+        mvn clean verify -Possrh -DskipTests -o
         mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=1.0.0 -o
-        mvn clean deploy -Possrh,oomph-p2
+        mvn clean deploy -Possrh,oomph-p2 -DskipTests
         mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=1.0.1.qualifier -o
     -->
     <profiles>
