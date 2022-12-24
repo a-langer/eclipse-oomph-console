@@ -17,12 +17,8 @@ public class ConsoleLauncherApplication extends AbstractLauncherApplication {
                     ConsoleInstaller installer = new ConsoleInstaller(product);
                     installer.run();
                 } catch (Exception e) {
-                    System.err.println("Installation " + product + " failed");
-                    if (Parameters.VERBOSE) {
-                        e.printStackTrace();
-                    } else {
-                        System.err.println(e.getMessage());
-                    }
+                    System.err.println("ABORTING: " + e.getMessage()
+                            + (e.getCause() != null ? " " + e.getCause().getMessage() : ""));
                     throw e;
                 }
             }

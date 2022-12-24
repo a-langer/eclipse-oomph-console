@@ -169,13 +169,9 @@ public class ConsoleInstaller {
         }
         saveResources();
 
-        try {
-            performer.perform(new ConsoleProgressMonitor(this.verbose));
-            if (this.launch)
-                LaunchUtil.launchProduct(performer, true);
-        } catch (Exception e) {
-            System.err.println("ABORTING: " + e.getMessage());
-        }
+        performer.perform(new ConsoleProgressMonitor(this.verbose));
+        if (this.launch)
+            LaunchUtil.launchProduct(performer, true);
     }
 
     private void saveResources() {
