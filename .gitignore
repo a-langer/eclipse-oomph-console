@@ -36,6 +36,6 @@ com.chronon.sb.browser.launcher.prefs
 Corel Auto-Preserve/
 .DS_Store
 *_copy*
-*_SAVE.*
+* copy*
+*_SAVE*
 *.versionsBackup
-*.test
