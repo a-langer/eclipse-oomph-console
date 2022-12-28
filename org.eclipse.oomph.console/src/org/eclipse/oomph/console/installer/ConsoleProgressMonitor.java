@@ -1,25 +1,23 @@
 package org.eclipse.oomph.console.installer;
 
-import org.eclipse.core.runtime.IProduct;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.oomph.console.core.parameters.Parameters;
-import org.eclipse.ui.internal.ProductProperties;
 
-@SuppressWarnings("restriction")
 public class ConsoleProgressMonitor implements IProgressMonitor {
 
     private double totalWork = 0;
     private double worked = 0;
     private boolean headerPrinted = false;
+    private String headerText = null;
     private boolean verbose = Parameters.VERBOSE;
     private long oldTime = 0;
 
     public ConsoleProgressMonitor() {
     }
 
-    public ConsoleProgressMonitor(boolean verbose) {
+    public ConsoleProgressMonitor(boolean verbose, String headerText) {
         this.verbose = verbose;
+        this.headerText = headerText;
     }
 
     @Override
@@ -47,14 +45,14 @@ public class ConsoleProgressMonitor implements IProgressMonitor {
             double workDecimal = worked / totalWork;
             if ((newTime - oldTime > 100) || (worked >= 100)) {
                 returnToStart();
-                print("|");
+                print("[");
                 for (int i = 0; i <= workDecimal * length; i++) {
                     print("#");
                 }
                 for (int i = (int) (workDecimal * length); i < length; i++) {
-                    print(" ");
+                    print(".");
                 }
-                print("|");
+                print("]");
                 print(percentageWorked + "%");
                 oldTime = System.currentTimeMillis();
             }
@@ -62,11 +60,8 @@ public class ConsoleProgressMonitor implements IProgressMonitor {
     }
 
     private void printHeader() {
-        IProduct theProduct = Platform.getProduct();
-        if (theProduct != null) {
-            String headerText = ProductProperties.getAboutText(theProduct);
+        if (this.headerText != null) {
             System.out.println(headerText);
-            System.out.println(Parameters.VERSION.toUpperCase());
         }
     }
 

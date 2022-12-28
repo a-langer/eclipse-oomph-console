@@ -63,7 +63,8 @@ public class ConsoleInstaller {
         this.product = product.contains(":") ? product.split(":")[0] : product;
         this.version = product.contains(":") ? product.split(":")[1]
                 : System.getProperty(Parameters.OOMPH_VERSION_ID + "." + product, Parameters.VERSION);
-        this.project = System.getProperty(Parameters.OOMPH_PROJECT_ID + "." + product, Parameters.PROJECT);
+        this.project = System.getProperty(Parameters.OOMPH_PROJECT_ID + "." + product, Parameters.PROJECT)
+                .replaceAll("\\s+", "");
         this.redirection = System.getProperty(Parameters.REDIRECTION_ID + "." + product, Parameters.REDIRECTION);
         this.location = System.getProperty(Parameters.INSTALLATION_LOCATION_ID + "." + product,
                 Parameters.INSTALLATION_LOCATION);
@@ -169,7 +170,9 @@ public class ConsoleInstaller {
         }
         saveResources();
 
-        performer.perform(new ConsoleProgressMonitor(this.verbose));
+        String headerText = "Installation (" + this.product + ":" + this.version
+                + (this.project.length() > 0 ? " + " + this.project.replace(",", " + ") : "") + ")";
+        performer.perform(new ConsoleProgressMonitor(this.verbose, headerText));
         if (this.launch)
             LaunchUtil.launchProduct(performer, true);
     }
@@ -200,10 +203,10 @@ public class ConsoleInstaller {
         }
     }
 
-    private void init(String productId, String versionId, String projectID) throws NotFoundException {
+    private void init(String productId, String versionId, String projectId) throws NotFoundException {
         InstallationInitializer installationHelper = new InstallationInitializer();
         resourceSet = installationHelper.getResourceSet();
-        initInstallation(productId, versionId, projectID);
+        initInstallation(productId, versionId, projectId);
     }
 
     private void initInstallation(String productId, String versionId, String projectId) throws NotFoundException {
