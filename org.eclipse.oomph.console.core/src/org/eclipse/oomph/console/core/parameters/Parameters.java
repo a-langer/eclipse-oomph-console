@@ -17,6 +17,7 @@ public class Parameters {
     public static final String CLEAN_UNRESOLVED_ID = "oomph.performer.clean.unresolved";
     public static final String LAUNCH_AUTOMATICALLY_ID = SetupProperties.PROP_SETUP_LAUNCH_AUTOMATICALLY;
     public static final String INSTALLER_VERBOSE_ID = "oomph.installer.verbose";
+    public static final String INSTALLER_SSL_INSECURE_ID = "oomph.installer.ssl.insecure";
     public static final String INSTALLATION_LOCATION_ID = "oomph.installation.location";
     public static final String INSTALLATION_PRODUCT_FOLDER_ID = "oomph.installation.id";
     public static final String WORKSPACE_LOCATION_ID = "oomph.workspace.location";
@@ -31,6 +32,7 @@ public class Parameters {
             .parseBoolean(System.getProperty(CLEAN_UNRESOLVED_ID, "true"));
     public static final boolean LAUNCH_AUTOMATICALLY = Boolean.getBoolean(LAUNCH_AUTOMATICALLY_ID);
     public static final boolean VERBOSE = Boolean.getBoolean(INSTALLER_VERBOSE_ID);
+    public static final boolean SSL_INSECURE = Boolean.getBoolean(INSTALLER_SSL_INSECURE_ID);
     public static final String INSTALLATION_LOCATION = System.getProperty(INSTALLATION_LOCATION_ID);
     public static final String INSTALLATION_PRODUCT_FOLDER = System.getProperty(INSTALLATION_PRODUCT_FOLDER_ID);
     public static final String WORKSPACE_LOCATION = System.getProperty(WORKSPACE_LOCATION_ID,

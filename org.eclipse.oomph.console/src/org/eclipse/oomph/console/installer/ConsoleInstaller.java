@@ -9,12 +9,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSocketFactory;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.equinox.p2.core.UIServices;
 import org.eclipse.equinox.p2.metadata.ILicense;
+import org.eclipse.oomph.console.Activator;
 import org.eclipse.oomph.console.configuration.NotFoundException;
 import org.eclipse.oomph.console.configuration.ProductVersionSelector;
 import org.eclipse.oomph.console.core.p2.AcceptCacheUsageConfirmer;
@@ -22,6 +26,7 @@ import org.eclipse.oomph.console.core.p2.P2ServiceUI;
 import org.eclipse.oomph.console.core.parameters.Parameters;
 import org.eclipse.oomph.console.core.util.InstallationInitializer;
 import org.eclipse.oomph.console.core.util.LaunchUtil;
+import org.eclipse.oomph.console.core.util.NonStrictSSL;
 import org.eclipse.oomph.console.core.util.ScopeAdjuster;
 import org.eclipse.oomph.internal.setup.SetupPrompter;
 import org.eclipse.oomph.p2.internal.core.CacheUsageConfirmer;
@@ -41,6 +46,7 @@ import org.eclipse.oomph.setup.internal.core.SetupTaskPerformer;
 import org.eclipse.oomph.util.Confirmer;
 import org.eclipse.oomph.util.OS;
 import org.eclipse.oomph.util.UserCallback;
+import org.osgi.framework.BundleContext;
 
 @SuppressWarnings("restriction")
 public class ConsoleInstaller {
@@ -78,6 +84,8 @@ public class ConsoleInstaller {
         this.verbose = System.getProperty(Parameters.INSTALLER_VERBOSE_ID + "." + product) == null
                 ? Parameters.VERBOSE
                 : Boolean.getBoolean(Parameters.INSTALLER_VERBOSE_ID + "." + product);
+        if (Parameters.SSL_INSECURE)
+            disableSSLVerification();
     }
 
     public void run() throws Exception {
@@ -227,6 +235,12 @@ public class ConsoleInstaller {
         user.setCertificatePolicy(CertificatePolicy.ACCEPT);
 
         context = SetupContext.create(installation, streams, user);
+    }
+
+    private void disableSSLVerification() {
+        BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
+        bundleContext.registerService(SSLSocketFactory.class.getName(), NonStrictSSL.getSSLSocketFactory(), null);
+        bundleContext.registerService(HostnameVerifier.class.getName(), NonStrictSSL.getHostnameVerifier(), null);
     }
 
 }

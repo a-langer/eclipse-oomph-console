@@ -185,6 +185,12 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
   -Doomph.installer.verbose=true
   ```
 
+* `oomph.installer.ssl.insecure` (boolean, default `false`) - disable check of public key certificates (e.g. self-signed ones), ex.:
+
+  ```bash
+  -Doomph.installer.ssl.insecure=true
+  ```
+
 * `oomph.workspace.location` (string, default `oomph.installation.location`) - project workspace location, ex.:
 
   ```bash
