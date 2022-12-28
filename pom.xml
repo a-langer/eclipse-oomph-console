@@ -106,6 +106,7 @@
         <module>org.eclipse.oomph.console.site</module>
         <module>org.eclipse.oomph.console.tp</module>
         <module>org.eclipse.oomph.console.product</module>
+        <module>org.eclipse.oomph.console.test</module>
     </modules>
 
     <build>

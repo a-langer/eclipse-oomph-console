@@ -1,20 +1,22 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Console Oomph Plugin
-Bundle-SymbolicName: org.eclipse.oomph.console;singleton:=true
+Bundle-Name: Console Oomph Test
+Bundle-SymbolicName: org.eclipse.oomph.console.test;singleton:=true
 Bundle-Version: 1.0.2.qualifier
-Bundle-Activator: org.eclipse.oomph.console.Activator
+Bundle-Activator: org.eclipse.oomph.console.test.Activator
 Bundle-Vendor: com.github.a-langer
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.oomph.setup,
  org.eclipse.oomph.setup.core,
  org.eclipse.oomph.p2.core,
- org.eclipse.oomph.console.core
+ org.eclipse.oomph.console.core,
+ org.eclipse.oomph.console
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.oomph.console.installer,
- org.eclipse.oomph.console.application
-Automatic-Module-Name: org.eclipse.oomph.console
+Automatic-Module-Name: org.eclipse.oomph.console.test
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8,
  JavaSE-11
 Build-Jdk-Spec: 11
+Import-Package: org.junit,
+ org.junit.jupiter.api,
+ org.eclipse.oomph.console.application
