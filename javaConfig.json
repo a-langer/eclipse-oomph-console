@@ -2,7 +2,8 @@
     "projects": [
         "./org.eclipse.oomph.console",
         "./org.eclipse.oomph.console.core",
-        "./org.eclipse.oomph.console.feature"
+        "./org.eclipse.oomph.console.feature",
+        "./org.eclipse.oomph.console.test"
     ],
     "targetPlatform": "./org.eclipse.oomph.console.tp/org.eclipse.oomph.console.tp.target"
 }

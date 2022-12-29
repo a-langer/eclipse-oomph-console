@@ -1,6 +1,6 @@
 package org.eclipse.oomph.console.test;
 
-import org.junit.jupiter.api.Assertions;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,7 +55,7 @@ public class InstallerTest extends ConsoleLauncherApplication {
 
     @Test
     public void installEclipseApp() throws Exception {
-        Assertions.assertNull(start(null));
+        Assert.assertNull(start(null));
     }
 
 }
