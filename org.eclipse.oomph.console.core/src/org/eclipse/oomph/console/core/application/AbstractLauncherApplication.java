@@ -14,6 +14,7 @@ import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.core.UIServices;
 import org.eclipse.oomph.console.core.Activator;
 import org.eclipse.oomph.console.core.p2.P2ServiceUI;
+import org.eclipse.oomph.console.core.parameters.Parameters;
 import org.eclipse.oomph.p2.core.Agent;
 import org.eclipse.oomph.p2.core.AgentManager;
 import org.eclipse.oomph.p2.core.BundlePool;
@@ -43,9 +44,9 @@ public abstract class AbstractLauncherApplication implements IApplication {
                         IProvisioningAgent.SERVICE_NAME);
         agent.registerService(UIServices.SERVICE_NAME, P2ServiceUI.SERVICE_UI);
         initBundlePool();
-        setSharedBundlePoolPermissions(System.getProperty("setup.p2.agent"));
+        setSharedBundlePoolPermissions(Parameters.SETUP_P2_AGENT);
         run();
-        setSharedBundlePoolPermissions(System.getProperty("setup.p2.agent"));
+        setSharedBundlePoolPermissions(Parameters.SETUP_P2_AGENT);
 
         return null;
     }
@@ -53,7 +54,7 @@ public abstract class AbstractLauncherApplication implements IApplication {
     public abstract void run() throws Exception;
 
     private void initBundlePool() {
-        String customBundlePoolLocation = System.getProperty("setup.p2.agent");
+        String customBundlePoolLocation = Parameters.SETUP_P2_AGENT;
         BundlePool pool = null;
         if (customBundlePoolLocation != null) {
             pool = P2Util.getAgentManager().getBundlePool(new File(customBundlePoolLocation));

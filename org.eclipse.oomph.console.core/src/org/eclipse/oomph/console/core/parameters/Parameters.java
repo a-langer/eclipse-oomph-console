@@ -21,6 +21,7 @@ public class Parameters {
     public static final String INSTALLATION_LOCATION_ID = "oomph.installation.location";
     public static final String INSTALLATION_PRODUCT_FOLDER_ID = "oomph.installation.id";
     public static final String WORKSPACE_LOCATION_ID = "oomph.workspace.location";
+    public static final String SETUP_P2_AGENT_ID = "setup.p2.agent";
 
     public static final String PRODUCT = System.getProperty(OOMPH_PRODUCT_ID, "Not selected");
     public static final String VERSION = System.getProperty(OOMPH_VERSION_ID, "latest");
@@ -37,6 +38,7 @@ public class Parameters {
     public static final String INSTALLATION_PRODUCT_FOLDER = System.getProperty(INSTALLATION_PRODUCT_FOLDER_ID);
     public static final String WORKSPACE_LOCATION = System.getProperty(WORKSPACE_LOCATION_ID,
             INSTALLATION_LOCATION);
+    public static final String SETUP_P2_AGENT = System.getProperty(SETUP_P2_AGENT_ID);
     public static final boolean SETUP_OFFLINE = Boolean
             .parseBoolean(System.getProperty(SetupProperties.PROP_SETUP_OFFLINE, "true"));
     public static final boolean SETUP_MIRRORS = Boolean
