@@ -61,7 +61,6 @@ Typical use cases:
     -Doomph.product.id="epp.package.java" \
     -Doomph.project.id="swtbot" \
     -Doomph.workspace.location="$PWD/workspace" \
-    -Doomph.installation.id="eclipse-with-swtbot" \
     -Dsetup.p2.agent="$HOME/.p2"
   
   # Install "Model Workflow Engine" over "Eclipse IDE for Java Developers"
@@ -70,11 +69,10 @@ Typical use cases:
     -Doomph.product.id="epp.package.java" \
     -Doomph.project.id="MWE" \
     -Doomph.workspace.location="$PWD/workspace" \
-    -Doomph.installation.id="eclipse-with-mwe" \
     -Dsetup.p2.agent="$HOME/.p2"
   ```
 
-* Install multiple products and projects, ex.:
+* Install multiple projects over product, ex.:
 
   ```bash
   # Install "SWTBot testing tool", "Business Intelligence Reporting Tool" and "Model Workflow Engine" over "Eclipse IDE for Java Developers"
@@ -83,19 +81,6 @@ Typical use cases:
     -Doomph.product.id="epp.package.java" \
     -Doomph.project.id="swtbot,birt,MWE" \
     -Doomph.workspace.location="$PWD/workspace" \
-    -Doomph.installation.id="eclipse-with-swtbot-birt-mwe" \
-    -Dsetup.p2.agent="$HOME/.p2"
-  
-  # Install "SWTBot", "BIRT", "MWE" over "Eclipse IDE for Java Developers" and "BIRT", "MWE" over "Eclipse IDE for PHP Developers"
-  ./eclipse-inst -nosplash -application org.eclipse.oomph.console.application -vmargs \
-    -Doomph.installation.location="$PWD/ide" \
-    -Doomph.product.id="epp.package.java,epp.package.php" \
-    -Doomph.project.id.epp.package.java="swtbot,birt,MWE" \
-    -Doomph.project.id.epp.package.php="birt,MWE" \
-    -Doomph.workspace.location.epp.package.java="$PWD/workspace-java" \
-    -Doomph.workspace.location.epp.package.php="$PWD/workspace-php" \
-    -Doomph.installation.id.epp.package.java="java-with-swtbot-birt-mwe" \
-    -Doomph.installation.id.epp.package.php="php-with-birt-mwe" \
     -Dsetup.p2.agent="$HOME/.p2"
   ```
 
@@ -110,7 +95,6 @@ Typical use cases:
     -Doomph.product.id="epp.package.java" \
     -Doomph.project.id="bash.editor" \
     -Doomph.workspace.location="$PWD/workspace" \
-    -Doomph.installation.id="eclipse-with-basheditor" \
     -Dsetup.p2.agent="$HOME/.p2" \
     -Doomph.installer.verbose=true
   ```
@@ -124,59 +108,48 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
 * `oomph.product.id` (string, default `null`) - identifier of product in setup model, ex.:
 
   ```bash
-  # For single product
+  # For product with latest version
   -Doomph.product.id="epp.package.java"
-  # For multiple products
-  -Doomph.product.id="epp.package.java,epp.package.php"
+  # Or set the specific version for product
+  -Doomph.product.id="epp.package.java:latest"
   ```
 
-* `oomph.product.version` (string, default `latest`) - version of product in setup model, ex.:
+* `oomph.product.version` (string, default `latest`) - version of product in setup model, if not defined in `oomph.product.id`, ex.:
 
   ```bash
-  # For all products
   -Doomph.product.version="latest"
-  # Or set the version for specific product
-  -Doomph.product.id="epp.package.java:latest"
-  # Or set the version for multiple specific products
-  -Doomph.product.id="epp.package.java:latest,epp.package.php:latest"
   ```
 
 * `oomph.installation.location` (string, default `null`) - location of product installation, ex.:
 
   ```bash
-  # For all products
   -Doomph.installation.location="$PWD/ide"
-  # Or set the location for specific product, ex. "epp.package.java"
-  -Doomph.installation.location.epp.package.java="$PWD/ide-java"
   ```
 
 * `oomph.installation.id` (string, default specific for each product) - directory in `oomph.installation.location`, ex.:
 
   ```bash
-  # For all products
   -Doomph.installation.id="my-inst-dir"
-  # Or set the directory fro specific product, ex. "epp.package.java"
-  -Doomph.installation.id.epp.package.java="java-inst-dir"
   ```
 
 * `oomph.project.id` (string, default `null`) - identifier of project in setup model, ex.:
 
   ```bash
-  # For single project
+  # For single project with default stream
   -Doomph.project.id="swtbot"
-  # For multiple projects
+  # Or set the specific stream for project
+  -Doomph.project.id="swtbot:master"
+
+  # For multiple projects with default streams
   -Doomph.project.id="swtbot,birt,MWE"
+  # Or set the specific streams for multiple projects
+  -Doomph.project.id="swtbot:master,birt:master,MWE:master"
   ```
 
-* `oomph.project.stream` (string, default `master`) - stream of project in setup model, ex.:
+* `oomph.project.stream` (string, default `master`) - stream of all projects in setup model, if not defined in `oomph.project.id` ex.:
 
   ```bash
-  # For all projects
   -Doomph.project.stream="master"
-  # Or set the stream for specific project
-  -Doomph.project.id="swtbot:master"
-  # Or set the stream for multiple specific projects
-  -Doomph.project.id="swtbot:master,birt:master,MWE:master"
   ```
 
 * `oomph.installer.verbose` (boolean, default `false`) - enable verbose output instead of progress bar, ex.:
@@ -194,10 +167,7 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
 * `oomph.workspace.location` (string, default `oomph.installation.location`) - project workspace location, ex.:
 
   ```bash
-  # For all projects
   -Doomph.workspace.location="$PWD/my-workspace"
-  # Or set the workspace fro specific project, ex. "birt"
-  -Doomph.workspace.location.birt="$PWD/birt-workspace"
   ```
 
 * `oomph.redirection.setups` - location of basic setup model (contain org.eclipse.setup file), will be added to eclipse.ini as "oomph.redirection.index.redirection", ex.:

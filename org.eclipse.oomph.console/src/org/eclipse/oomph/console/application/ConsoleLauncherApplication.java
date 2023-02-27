@@ -1,6 +1,5 @@
 package org.eclipse.oomph.console.application;
 
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.oomph.console.core.application.AbstractLauncherApplication;
@@ -12,16 +11,12 @@ public class ConsoleLauncherApplication extends AbstractLauncherApplication {
     public void run() throws Exception {
         long startTime = System.currentTimeMillis();
         try {
-            for (String product : Arrays.asList(Parameters.PRODUCT.split(","))) {
-                try {
-                    ConsoleInstaller installer = new ConsoleInstaller(product);
-                    installer.run();
-                } catch (Exception e) {
-                    System.err.println("ABORTING: " + e.getMessage()
-                            + (e.getCause() != null ? " " + e.getCause().getMessage() : ""));
-                    throw e;
-                }
-            }
+            ConsoleInstaller installer = new ConsoleInstaller(Parameters.PRODUCT);
+            installer.run();
+        } catch (Exception e) {
+            System.err.println("ABORTING: " + e.getMessage()
+                    + (e.getCause() != null ? " " + e.getCause().getMessage() : ""));
+            throw e;
         } finally {
             long endTime = System.currentTimeMillis();
             long millis = endTime - startTime;

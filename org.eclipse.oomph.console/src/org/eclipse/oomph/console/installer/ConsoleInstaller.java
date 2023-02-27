@@ -67,23 +67,14 @@ public class ConsoleInstaller {
 
     public ConsoleInstaller(String product) {
         this.product = product.contains(":") ? product.split(":")[0] : product;
-        this.version = product.contains(":") ? product.split(":")[1]
-                : System.getProperty(Parameters.OOMPH_VERSION_ID + "." + product, Parameters.VERSION);
-        this.project = System.getProperty(Parameters.OOMPH_PROJECT_ID + "." + product, Parameters.PROJECT)
-                .replaceAll("\\s+", "");
-        this.redirection = System.getProperty(Parameters.REDIRECTION_ID + "." + product, Parameters.REDIRECTION);
-        this.location = System.getProperty(Parameters.INSTALLATION_LOCATION_ID + "." + product,
-                Parameters.INSTALLATION_LOCATION);
-        this.folder = System.getProperty(Parameters.INSTALLATION_PRODUCT_FOLDER_ID + "." + product,
-                Parameters.INSTALLATION_PRODUCT_FOLDER);
-        this.workspace = System.getProperty(Parameters.WORKSPACE_LOCATION_ID + "." + project,
-                Parameters.WORKSPACE_LOCATION);
-        this.launch = System.getProperty(Parameters.LAUNCH_AUTOMATICALLY_ID + "." + product) == null
-                ? Parameters.LAUNCH_AUTOMATICALLY
-                : Boolean.getBoolean(Parameters.LAUNCH_AUTOMATICALLY_ID + "." + product);
-        this.verbose = System.getProperty(Parameters.INSTALLER_VERBOSE_ID + "." + product) == null
-                ? Parameters.VERBOSE
-                : Boolean.getBoolean(Parameters.INSTALLER_VERBOSE_ID + "." + product);
+        this.version = product.contains(":") ? product.split(":")[1]: Parameters.VERSION;
+        this.project = Parameters.PROJECT.replaceAll("\\s+", "");
+        this.redirection = Parameters.REDIRECTION;
+        this.location = Parameters.INSTALLATION_LOCATION;
+        this.folder = Parameters.INSTALLATION_PRODUCT_FOLDER;
+        this.workspace = Parameters.WORKSPACE_LOCATION;
+        this.launch = Parameters.LAUNCH_AUTOMATICALLY;
+        this.verbose =  Parameters.VERBOSE;
         if (Parameters.SSL_INSECURE)
             disableSSLVerification();
     }
