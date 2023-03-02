@@ -10,6 +10,7 @@ public class ConsoleProgressMonitor implements IProgressMonitor {
     private boolean headerPrinted = false;
     private String headerText = null;
     private boolean verbose = Parameters.VERBOSE;
+    private boolean textLayout = Parameters.TEXT_LAYOUT;
     private long oldTime = 0;
 
     public ConsoleProgressMonitor() {
@@ -39,7 +40,7 @@ public class ConsoleProgressMonitor implements IProgressMonitor {
             printHeader();
             headerPrinted = true;
         }
-        if (!verbose) {
+        if (!verbose && !textLayout) {
             worked += work;
             int percentageWorked = (int) (worked / totalWork * 100);
             double workDecimal = worked / totalWork;

@@ -74,7 +74,7 @@ public class ConsoleInstaller {
         this.folder = Parameters.INSTALLATION_PRODUCT_FOLDER;
         this.workspace = Parameters.WORKSPACE_LOCATION;
         this.launch = Parameters.LAUNCH_AUTOMATICALLY;
-        this.verbose =  Parameters.VERBOSE;
+        this.verbose = Parameters.VERBOSE;
         if (Parameters.SSL_INSECURE)
             disableSSLVerification();
     }
@@ -152,7 +152,7 @@ public class ConsoleInstaller {
         performer.put(CacheUsageConfirmer.class, new AcceptCacheUsageConfirmer());
         performer.put(ILicense.class, Confirmer.ACCEPT);
         performer.put(Certificate.class, Confirmer.ACCEPT);
-        performer.setProgress(new ConsoleProgressLog(this.verbose));
+        performer.setProgress(new ConsoleProgressLog(Parameters.TEXT_LAYOUT));
         performer.setOffline(Parameters.SETUP_OFFLINE);
         performer.setMirrors(Parameters.SETUP_MIRRORS);
         performer.setSkipConfirmation(true);

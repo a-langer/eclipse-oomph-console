@@ -72,6 +72,7 @@
                         <oomph.p2.flush>false</oomph.p2.flush>
                         <oomph.p2.repository.fail.permanently>true</oomph.p2.repository.fail.permanently>
                         <sun.zip.disableMemoryMapping>true</sun.zip.disableMemoryMapping>
+                        <oomph.installer.layout>text</oomph.installer.layout>
                     </systemProperties>
                     <includes>
                         <include>**/*Test.java</include>

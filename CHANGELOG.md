@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Changes, might expect in upcoming releases.
 
+### Added
+
+- [Added changelog](https://github.com/a-langer/eclipse-oomph-console/commit/37a6fd76315c083b3baa7f857d45a48e57ff22b2)
+
 ### Removed
 
 - [Removed multiple installation of products](https://github.com/a-langer/eclipse-oomph-console/commit/a288549c04bf562ad62fb87e51bd462dd998416b)
@@ -19,7 +23,7 @@ Release of version [1.0.2](https://search.maven.org/artifact/com.github.a-langer
 
 - [win32.x86_64.zip](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.2/org.eclipse.oomph.console.product-1.0.2-win32.win32.x86_64.zip)
 - [linux.gtk.x86_64.tar.gz](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.2/org.eclipse.oomph.console.product-1.0.2-linux.gtk.x86_64.tar.gz)
-- [macosx.cocoa.x86_64.tar](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.2/org.eclipse.oomph.console.product-1.0.2-macosx.cocoa.x86_64.tar.gz).
+- [macosx.cocoa.x86_64.tar](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.2/org.eclipse.oomph.console.product-1.0.2-macosx.cocoa.x86_64.tar.gz)
 
 ### Added
 
@@ -44,7 +48,7 @@ Release of version [1.0.1](https://search.maven.org/artifact/com.github.a-langer
 
 - [win32.x86_64.zip](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.1/org.eclipse.oomph.console.product-1.0.1-win32.win32.x86_64.zip)
 - [linux.gtk.x86_64.tar.gz](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.1/org.eclipse.oomph.console.product-1.0.1-linux.gtk.x86_64.tar.gz)
-- [macosx.cocoa.x86_64.tar](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.1/org.eclipse.oomph.console.product-1.0.1-macosx.cocoa.x86_64.tar.gz).
+- [macosx.cocoa.x86_64.tar](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.1/org.eclipse.oomph.console.product-1.0.1-macosx.cocoa.x86_64.tar.gz)
 
 ### Fixed
 
@@ -56,11 +60,11 @@ Release of version [1.0.0](https://search.maven.org/artifact/com.github.a-langer
 
 - [win32.x86_64.zip](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.0/org.eclipse.oomph.console.product-1.0.0-win32.win32.x86_64.zip)
 - [linux.gtk.x86_64.tar.gz](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.0/org.eclipse.oomph.console.product-1.0.0-linux.gtk.x86_64.tar.gz)
-- [macosx.cocoa.x86_64.tar](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.0/org.eclipse.oomph.console.product-1.0.0-macosx.cocoa.x86_64.tar.gz).
+- [macosx.cocoa.x86_64.tar](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.0/org.eclipse.oomph.console.product-1.0.0-macosx.cocoa.x86_64.tar.gz)
 
 ### Added
 
-- First release version [1.0.0][1.0.0].
+- First release version [1.0.0][1.0.0]
 
 [all]: https://search.maven.org/artifact/com.github.a-langer/org.eclipse.oomph.console.product
 [unreleased]: https://github.com/a-langer/eclipse-oomph-console/compare/1.0.2...HEAD

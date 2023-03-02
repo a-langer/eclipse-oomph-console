@@ -152,6 +152,12 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
   -Doomph.project.stream="master"
   ```
 
+* `oomph.installer.layout` (string, default `progress`) - output layout mode, can be `progress` or `text`, ex.:
+
+  ```bash
+  -Doomph.installer.layout=text
+  ```
+
 * `oomph.installer.verbose` (boolean, default `false`) - enable verbose output instead of progress bar, ex.:
 
   ```bash
