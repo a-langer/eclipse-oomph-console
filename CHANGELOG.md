@@ -12,6 +12,8 @@ Changes, might expect in upcoming releases.
 ### Added
 
 - [Added changelog](https://github.com/a-langer/eclipse-oomph-console/commit/37a6fd76315c083b3baa7f857d45a48e57ff22b2)
+- [Added oomph.installer.layout](https://github.com/a-langer/eclipse-oomph-console/commit/3e0ddc3a946d9d186396dcd6d9c3ada99e4315ff)
+- [Added oomph.console project](https://github.com/a-langer/eclipse-oomph-console/commit/f83a60c4bfb9aca090ba19dc9c1b69972e6ecf33)
 
 ### Removed
 
