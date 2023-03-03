@@ -68,6 +68,40 @@
     <stream name="master" label="master"/>
     <description>Eclipse Bash Editor</description>
   </project>
+  <project
+      name="oomph.console" 
+      label="oomph.console">
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Redirect Update Site">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="oomph.console.updatesite"
+          defaultValue="https://alanger.jfrog.io/artifactory/eclipse-oomph-console/">
+      </setupTask>
+      <setupTask
+          xsi:type="setup:RedirectionTask"
+          sourceURL="https://alanger.jfrog.io/artifactory/eclipse-oomph-console/"
+          targetURL="${oomph.console.updatesite}"/>
+      <description>Change Update Site, ex.: -Doomph.console.updatesite=https://mysite/eclipse-oomph-console/</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Install Console Oomph plugin">
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="Console Oomph features"
+          licenseConfirmationDisabled="true">
+        <requirement
+            name="org.eclipse.oomph.console.feature.feature.group"
+            versionRange="0.0.0"/>
+        <repository
+            url="https://alanger.jfrog.io/artifactory/eclipse-oomph-console/"/>
+      </setupTask>
+    </setupTask>
+    <stream name="master" label="master"/>
+    <description>Console Oomph plugin</description>
+  </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
       href="org.eclipse.setup#//@projectCatalogs[name='custom.projects']"/>

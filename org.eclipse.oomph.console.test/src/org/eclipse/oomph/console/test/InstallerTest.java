@@ -50,7 +50,7 @@ public class InstallerTest extends ConsoleLauncherApplication {
         System.setProperty(Parameters.OOMPH_PRODUCT_ID, "epp.package.java_custom");
 
         System.setProperty(Parameters.WORKSPACE_LOCATION_ID, installLacation);
-        System.setProperty(Parameters.OOMPH_PROJECT_ID, "bash.editor");
+        System.setProperty(Parameters.OOMPH_PROJECT_ID, "bash.editor,oomph.console");
     }
 
     @Test
