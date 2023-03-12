@@ -234,8 +234,8 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
 
 * Oomph source code: [git][2], [patch headless mode][1].
 * Oomph docs: [Eclipse Oomph Authoring][4] and [Oomph Targlets][5].
-* Example of setups models: [default products][6], [default projects][7], [eclipsesource product][8], [oomph playground][9].
-* Tutorials: [Oomph basic tutorial][3], [Customized Eclipse IDE provisioning with Oomph][10], [Maven Tycho for building Eclipse plug-ins][11], [How to deploy to a Maven repository][12].
+* Example of setups models: [default products][6], [default projects][7], [eclipsesource product][8], [oomph playground][9], [Arlo's project catalog][10].
+* Tutorials: [Oomph basic tutorial][3], [Customized Eclipse IDE provisioning with Oomph][11], [Maven Tycho for building Eclipse plug-ins][12], [How to deploy to a Maven repository][13].
 
 ## Development environment
 
@@ -251,6 +251,7 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
 [7]: https://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/org.eclipse.projects.setup
 [8]: https://github.com/eclipsesource/oomph/blob/master/EclipseSource.setup
 [9]: https://github.com/nittka/oomph-playground
-[10]: https://www.vogella.com/tutorials/Oomph/article.html
-[11]: https://www.vogella.com/tutorials/EclipseTycho/article.html
-[12]: https://wiki.eclipse.org/Tycho:How_to_deploy_to_a_Maven_repository
+[10]: https://github.com/ArloL/eclipse-projects
+[11]: https://www.vogella.com/tutorials/Oomph/article.html
+[12]: https://www.vogella.com/tutorials/EclipseTycho/article.html
+[13]: https://wiki.eclipse.org/Tycho:How_to_deploy_to_a_Maven_repository
