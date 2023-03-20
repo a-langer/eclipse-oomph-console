@@ -25,6 +25,12 @@
   <project href="http://git.eclipse.org/c/swtbot/org.eclipse.swtbot.git/plain/devtools/oomph/SWTBot.setup#/"/>
   <project href="https://raw.githubusercontent.com/eclipse/mwe/master/releng/MWE.setup#/"/>
   <project
+      name="empty" 
+      label="empty">
+    <stream name="master" label="master"/>
+    <description>Empty project</description>
+  </project>
+  <project
       name="bash.editor" 
       label="bash.editor">
     <setupTask
