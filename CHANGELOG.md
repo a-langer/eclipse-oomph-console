@@ -14,10 +14,12 @@ Changes, might expect in upcoming releases.
 - [Added changelog](https://github.com/a-langer/eclipse-oomph-console/commit/37a6fd76315c083b3baa7f857d45a48e57ff22b2)
 - [Added oomph.installer.layout](https://github.com/a-langer/eclipse-oomph-console/commit/3e0ddc3a946d9d186396dcd6d9c3ada99e4315ff)
 - [Added oomph.console project](https://github.com/a-langer/eclipse-oomph-console/commit/f83a60c4bfb9aca090ba19dc9c1b69972e6ecf33)
+- [Added empty project](https://github.com/a-langer/eclipse-oomph-console/commit/e7f14090c51ed8f5b2d4105771ce2b27a4df0d91)
 
 ### Removed
 
 - [Removed multiple installation of products](https://github.com/a-langer/eclipse-oomph-console/commit/a288549c04bf562ad62fb87e51bd462dd998416b)
+- [Removed default application](https://github.com/a-langer/eclipse-oomph-console/commit/de1647a468b2cad60d60790eef59a3c9792fd1db)
 
 ## [1.0.2][1.0.2] - 2023-01-02
 
