@@ -78,8 +78,9 @@ public class InstallationInitializer {
 
         // Collect the URIs is order of importance.
         Set<URI> resourceURIs = new LinkedHashSet<>();
-        for (EClass eClass : new EClass[] { SetupPackage.Literals.INDEX, SetupPackage.Literals.PRODUCT_CATALOG,
-                SetupPackage.Literals.PRODUCT, SetupPackage.Literals.PROJECT_CATALOG, SetupPackage.Literals.PROJECT }) {
+        for (EClass eClass : new EClass[] { SetupPackage.Literals.INDEX,
+                SetupPackage.Literals.PRODUCT_CATALOG, SetupPackage.Literals.PRODUCT,
+                SetupPackage.Literals.PROJECT_CATALOG, SetupPackage.Literals.PROJECT }) {
             Set<URI> uris = uriMap.remove(eClass);
             if (uris != null) {
                 resourceURIs.addAll(uris);
@@ -102,8 +103,8 @@ public class InstallationInitializer {
             }.begin(resourceURIs, progressMonitor);
         }
         Resource resource = resourceSet.getResource(SetupContext.INDEX_SETUP_URI, false);
-        catalogManager
-                .indexLoaded((Index) EcoreUtil.getObjectByType(resource.getContents(), SetupPackage.Literals.INDEX));
+        catalogManager.indexLoaded((Index) EcoreUtil.getObjectByType(resource.getContents(),
+                SetupPackage.Literals.INDEX));
     }
 
     public ResourceSet getResourceSet() {

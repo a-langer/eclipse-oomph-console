@@ -3,11 +3,12 @@ package org.eclipse.oomph.console.installer;
 import java.io.File;
 import java.io.IOException;
 import java.security.cert.Certificate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSocketFactory;
@@ -31,9 +32,12 @@ import org.eclipse.oomph.console.core.util.ScopeAdjuster;
 import org.eclipse.oomph.internal.setup.SetupPrompter;
 import org.eclipse.oomph.p2.internal.core.CacheUsageConfirmer;
 import org.eclipse.oomph.setup.CertificatePolicy;
+import org.eclipse.oomph.setup.CompoundTask;
+import org.eclipse.oomph.setup.Configuration;
 import org.eclipse.oomph.setup.Installation;
 import org.eclipse.oomph.setup.Product;
 import org.eclipse.oomph.setup.ProductVersion;
+import org.eclipse.oomph.setup.SetupTask;
 import org.eclipse.oomph.setup.SetupTaskContext;
 import org.eclipse.oomph.setup.Stream;
 import org.eclipse.oomph.setup.Trigger;
@@ -43,6 +47,7 @@ import org.eclipse.oomph.setup.VariableTask;
 import org.eclipse.oomph.setup.Workspace;
 import org.eclipse.oomph.setup.internal.core.SetupContext;
 import org.eclipse.oomph.setup.internal.core.SetupTaskPerformer;
+import org.eclipse.oomph.setup.p2.P2Task;
 import org.eclipse.oomph.util.Confirmer;
 import org.eclipse.oomph.util.OS;
 import org.eclipse.oomph.util.UserCallback;
@@ -52,7 +57,6 @@ import org.osgi.framework.BundleContext;
 public class ConsoleInstaller {
 
     private SetupContext context;
-    private SetupTaskPerformer performer;
     private ResourceSet resourceSet;
 
     private final String product;
@@ -67,7 +71,7 @@ public class ConsoleInstaller {
 
     public ConsoleInstaller(String product) {
         this.product = product.contains(":") ? product.split(":")[0] : product;
-        this.version = product.contains(":") ? product.split(":")[1]: Parameters.VERSION;
+        this.version = product.contains(":") ? product.split(":")[1] : Parameters.VERSION;
         this.project = Parameters.PROJECT.replaceAll("\\s+", "");
         this.redirection = Parameters.REDIRECTION;
         this.location = Parameters.INSTALLATION_LOCATION;
@@ -81,7 +85,7 @@ public class ConsoleInstaller {
 
     public void run() throws Exception {
         init(this.product, this.version, this.project);
-        URIConverter uriConverter = resourceSet.getURIConverter();
+        URIConverter uriConverter = this.resourceSet.getURIConverter();
 
         String overrideRedirection = System.getProperty(this.redirection);
         if (overrideRedirection != null) {
@@ -110,8 +114,8 @@ public class ConsoleInstaller {
 
             @Override
             public boolean promptVariables(List<? extends SetupTaskContext> performers) {
-                for (SetupTaskContext context : performers) {
-                    SetupTaskPerformer promptedPerformer = (SetupTaskPerformer) context;
+                for (SetupTaskContext setupTaskContext : performers) {
+                    SetupTaskPerformer promptedPerformer = (SetupTaskPerformer) setupTaskContext;
                     List<VariableTask> unresolvedVariables = promptedPerformer.getUnresolvedVariables();
                     for (int i = 0; i <= unresolvedVariables.size() - 1; ++i) {
                         VariableTask variable = unresolvedVariables.get(i);
@@ -137,15 +141,15 @@ public class ConsoleInstaller {
         };
 
         ScopeAdjuster adjuster = new ScopeAdjuster();
-        adjuster.setWorkspaceLacation(context.getUser(), this.workspace);
-        adjuster.setInstallationLocation(context.getUser(), this.location);
-        adjuster.setProductFolderName(context.getUser(), this.folder);
-        adjuster.setProductFolderName(context.getInstallation().getProductVersion(), this.folder);
+        adjuster.setWorkspaceLacation(this.context.getUser(), this.workspace);
+        adjuster.setInstallationLocation(this.context.getUser(), this.location);
+        adjuster.setProductFolderName(this.context.getUser(), this.folder);
+        adjuster.setProductFolderName(this.context.getInstallation().getProductVersion(), this.folder);
 
         Trigger trigger = Trigger.getByName(Parameters.TRIGGER);
-        performer = SetupTaskPerformer.create(uriConverter, prompter, trigger, context, false);
+        SetupTaskPerformer performer = SetupTaskPerformer.create(uriConverter, prompter, trigger, context, false);
 
-        performer.recordVariables(context.getInstallation(), context.getWorkspace(), context.getUser());
+        performer.recordVariables(this.context.getInstallation(), this.context.getWorkspace(), this.context.getUser());
         if (Parameters.CLEAN_UNRESOLVED)
             performer.getUnresolvedVariables().clear();
         performer.put(UIServices.class, P2ServiceUI.SERVICE_UI);
@@ -167,71 +171,116 @@ public class ConsoleInstaller {
                 System.out.println("Reinstalling");
             }
         }
-        saveResources();
 
-        String headerText = "Installation (" + this.product + ":" + this.version
-                + (this.project.length() > 0 ? " + " + this.project.replace(",", " + ") : "") + ")";
-        performer.perform(new ConsoleProgressMonitor(this.verbose, headerText));
+        performer.perform(new ConsoleProgressMonitor(this.verbose, getHeaderText(this.context)));
+
+        saveResources(performer);
+
         if (this.launch)
             LaunchUtil.launchProduct(performer, true);
     }
 
-    private void saveResources() {
+    private void saveResources(SetupTaskPerformer performer) throws IOException {
         Installation installation = performer.getInstallation();
         Resource installationResource = installation.eResource();
         Objects.requireNonNull(installationResource, "installationResource is null");
-        installationResource.setURI(URI.createFileURI(
-                new File(performer.getProductConfigurationLocation(), "org.eclipse.oomph.setup/installation.setup")
-                        .toString()));
+        installationResource.setURI(URI.createFileURI(new File(performer.getProductConfigurationLocation(),
+                "org.eclipse.oomph.setup/installation.setup").toString()));
 
         Workspace workspace = performer.getWorkspace();
-        Resource workspaceResource = null;
-        if (workspace != null) {
-            workspaceResource = workspace.eResource();
+        Resource workspaceResource = workspace != null ? workspace.eResource() : null;
+        if (workspaceResource != null) {
             workspaceResource.setURI(URI.createFileURI(new File(performer.getWorkspaceLocation(),
                     ".metadata/.plugins/org.eclipse.oomph.setup/workspace.setup").toString()));
         }
         performer.savePasswords();
-        try {
+
+        if (performer.getProductConfigurationLocation() != null)
             installationResource.save(Collections.emptyMap());
-            if (workspaceResource != null) {
-                workspaceResource.save(Collections.emptyMap());
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        if (workspaceResource != null && performer.getWorkspaceLocation() != null) {
+            workspaceResource.save(Collections.emptyMap());
         }
     }
 
     private void init(String productId, String versionId, String projectId) throws NotFoundException {
         InstallationInitializer installationHelper = new InstallationInitializer();
-        resourceSet = installationHelper.getResourceSet();
+        this.resourceSet = installationHelper.getResourceSet();
         initInstallation(productId, versionId, projectId);
     }
 
     private void initInstallation(String productId, String versionId, String projectId) throws NotFoundException {
-        ProductVersionSelector selector = new ProductVersionSelector(resourceSet);
+        ProductVersionSelector selector = new ProductVersionSelector(this.resourceSet);
+        ProductVersion version = null;
+        Installation installation = null;
+        List<Stream> streams = new LinkedList<>();
 
-        Product product = selector.selectProduct(productId);
-        ProductVersion version = selector.selectProductVersion(product, versionId);
-        List<Stream> streams = new ArrayList<>();
-        if (!projectId.isEmpty()) {
-            streams = selector.selectProjectStreams(Arrays.asList(projectId.split(",")));
+        Configuration configuration = selector.selectConfiguration();
+        if (configuration != null) {
+            version = configuration.getInstallation().getProductVersion();
+            if (version != null) {
+                this.context = SetupContext.create(this.resourceSet, version);
+                installation = this.context.getInstallation();
+                installation.getSetupTasks().addAll(configuration.getInstallation().getSetupTasks());
+            }
+            Workspace workspace = configuration.getWorkspace();
+            if (workspace != null) {
+                streams.addAll(workspace.getStreams());
+            }
         }
-        context = SetupContext.create(resourceSet, version);
-        Installation installation = context.getInstallation();
+
+        if (version == null) {
+            Product product = selector.selectProduct(productId);
+            version = selector.selectProductVersion(product, versionId);
+            this.context = SetupContext.create(this.resourceSet, version);
+            installation = this.context.getInstallation();
+        }
+
         installation.setProductVersion(version);
 
-        User user = context.getUser();
+        if (!projectId.isEmpty()) {
+            streams.addAll(selector.selectProjectStreams(Arrays.asList(projectId.split(","))));
+        }
+
+        User user = this.context.getUser();
         user.setUnsignedPolicy(UnsignedPolicy.ACCEPT);
         user.setCertificatePolicy(CertificatePolicy.ACCEPT);
 
-        context = SetupContext.create(installation, streams, user);
+        this.context = SetupContext.create(installation, streams, user);
     }
 
     private void disableSSLVerification() {
         BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
         bundleContext.registerService(SSLSocketFactory.class.getName(), NonStrictSSL.getSSLSocketFactory(), null);
         bundleContext.registerService(HostnameVerifier.class.getName(), NonStrictSSL.getHostnameVerifier(), null);
+    }
+
+    private String getHeaderText(SetupContext context) {
+        String versionTasks = getChilds(context.getInstallation().getProductVersion().getSetupTasks(),
+                new LinkedList<>()).stream()
+                .filter(t -> t instanceof P2Task || t instanceof CompoundTask)
+                .map(t -> t instanceof P2Task ? ((P2Task) t).getLabel() : ((CompoundTask) t).getName())
+                .collect(Collectors.joining(" + "));
+        String tasks = getChilds(context.getInstallation().getSetupTasks(), new LinkedList<>()).stream()
+                .filter(t -> t instanceof P2Task || t instanceof CompoundTask)
+                .map(t -> t instanceof P2Task ? ((P2Task) t).getLabel() : ((CompoundTask) t).getName())
+                .collect(Collectors.joining(" + "));
+        String streams = context.getWorkspace().getStreams().stream()
+                .map(s -> s.getProject().getName() != null ? s.getProject().getName() : s.getProject().getLabel())
+                .collect(Collectors.joining(" + "));
+        return "Performing P2 Director (" + versionTasks
+                + (!tasks.isEmpty() ? " + " + tasks : "")
+                + (!streams.isEmpty() ? " + " + streams : "") + ")";
+    }
+
+    private List<SetupTask> getChilds(List<SetupTask> src, List<SetupTask> dst) {
+        for (SetupTask t : src) {
+            if (t instanceof CompoundTask) {
+                getChilds(((CompoundTask) t).getSetupTasks(), dst);
+            } else {
+                dst.add(t);
+            }
+        }
+        return dst;
     }
 
 }

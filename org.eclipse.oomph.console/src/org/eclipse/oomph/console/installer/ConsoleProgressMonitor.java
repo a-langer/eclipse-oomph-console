@@ -61,7 +61,7 @@ public class ConsoleProgressMonitor implements IProgressMonitor {
     }
 
     private void printHeader() {
-        if (this.headerText != null) {
+        if (this.headerText != null && !textLayout) {
             System.out.println(headerText);
         }
     }

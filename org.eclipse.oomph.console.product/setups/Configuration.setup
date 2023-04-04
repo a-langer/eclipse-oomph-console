@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Configuration
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    label="custom.configuration">
+  <installation
+      name="custom.configuration">
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="OCL">
+      <requirement
+          name="org.eclipse.ocl.examples.feature.group"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Additional Plugins">
+        <setupTask
+            xsi:type="setup:CompoundTask"
+            name="Editors">
+          <setupTask
+              xsi:type="setup.p2:P2Task"
+              label="Wildweb Developer's Schema Document Editors">
+            <requirement
+                name="org.eclipse.wildwebdeveloper.feature.feature.group"/>
+            <requirement
+                name="org.eclipse.wildwebdeveloper.xml.feature.feature.group"/>
+            <repository
+                url="http://download.eclipse.org/wildwebdeveloper/releases/latest/"/>
+          </setupTask>
+          <setupTask
+              xsi:type="setup.p2:P2Task"
+              label="FluentMark Markdown support">
+            <requirement
+                name="net.certiv.fluent.dt.feature.feature.group"/>
+            <repository
+                url="https://www.certiv.net/updates"/>
+          </setupTask>
+          <setupTask
+              xsi:type="setup.p2:P2Task"
+              label="Albert Tregnaghi's Editors for Yaml, Bash and Jenkins">
+            <requirement
+                name="de.jcup.asciidoctoreditor.feature.group"/>
+            <requirement
+                name="de.jcup.yamleditor.feature.group"/>
+            <requirement
+                name="de.jcup.basheditor.feature.group"/>
+            <requirement
+                name="de.jcup.jenkinseditor.feature.feature.group"/>
+            <repository
+                url="https://de-jcup.github.io/update-site-eclipse-asciidoctor-editor/update-site/"/>
+            <repository
+                url="https://de-jcup.github.io/update-site-eclipse-yaml-editor/update-site"/>
+            <repository
+                url="https://de-jcup.github.io/update-site-eclipse-bash-editor/update-site"/>
+            <repository
+                url="https://de-jcup.github.io/update-site-eclipse-jenkins-editor/update-site/"/>
+            <description>Allow manipulation of platform files and code generation templates</description>
+          </setupTask>
+        </setupTask>
+    </setupTask>
+    <productVersion
+        href="index:/org.eclipse.setup#//@productCatalogs[name='custom.products']/@products[name='epp.package.java_custom']/@versions[name='latest']"/>
+<!-- Example of load from URL
+    <productVersion
+        href="https://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/org.eclipse.products.setup#//@products[name='epp.package.java']/@versions[name='latest']" />
+-->
+  </installation>
+  <workspace
+      name="configuration.workspace"
+      label="configuration.workspace">
+    <stream
+        href="index:/org.eclipse.setup#//@projectCatalogs[name='custom.projects']/@projects[name='empty']/@streams[name='master']"/>
+    <description>The rdti workspace provides cool stuff.</description>
+  </workspace>
+  <description>The rdti configuration provides cool stuff.</description>
+</setup:Configuration>

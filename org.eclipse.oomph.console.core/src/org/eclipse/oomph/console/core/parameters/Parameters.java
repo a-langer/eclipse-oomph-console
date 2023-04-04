@@ -8,6 +8,7 @@ public class Parameters {
     private Parameters() {
     }
 
+    public static final String OOMPH_CONFIGURATION_ID = "oomph.configuration.setups";
     public static final String OOMPH_PRODUCT_ID = "oomph.product.id";
     public static final String OOMPH_VERSION_ID = "oomph.product.version";
     public static final String OOMPH_PROJECT_ID = "oomph.project.id";
@@ -24,6 +25,7 @@ public class Parameters {
     public static final String WORKSPACE_LOCATION_ID = "oomph.workspace.location";
     public static final String SETUP_P2_AGENT_ID = "setup.p2.agent";
 
+    public static final String CONFIGURATION = System.getProperty(OOMPH_CONFIGURATION_ID);
     public static final String PRODUCT = System.getProperty(OOMPH_PRODUCT_ID, "Not selected");
     public static final String VERSION = System.getProperty(OOMPH_VERSION_ID, "latest");
     public static final String PROJECT = System.getProperty(OOMPH_PROJECT_ID, "");

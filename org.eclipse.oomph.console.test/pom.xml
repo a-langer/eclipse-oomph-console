@@ -34,7 +34,7 @@
 
     <!--
         mvn -pl '!org.eclipse.oomph.console.product' clean install -o
-        mvn -rf :org.eclipse.oomph.console.test clean integration-test -o
+        mvn -pl '!org.eclipse.oomph.console.product' clean integration-test -o
 
         https://www.vogella.com/tutorials/EclipseTycho/article.html
         https://wiki.eclipse.org/Tycho/Reference_Card
@@ -50,16 +50,16 @@
                 <artifactId>tycho-surefire-plugin</artifactId>
                 <version>${tycho.version}</version>
                 <configuration>
-                    <trimStackTrace>true</trimStackTrace>
+                    <trimStackTrace>false</trimStackTrace>
                     <failIfNoTests>false</failIfNoTests>
                     <threadCount>1</threadCount>
                     <skipAfterFailureCount>1</skipAfterFailureCount>
                     <systemProperties>
                         <project.parent.basedir>${maven.multiModuleProjectDirectory}</project.parent.basedir>
                         <project.basedir>${project.basedir}</project.basedir>
+                        <project.build.directory>${project.build.directory}</project.build.directory>
                         <setup.p2.agent>${user.home}/.p2</setup.p2.agent>
                         <oomph.redirection.setups>index:/->http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/</oomph.redirection.setups>
-                        <oomph.redirection.setupsDir>index:/->${maven.multiModuleProjectDirectory}/org.eclipse.oomph.console.product/setups/</oomph.redirection.setupsDir>
                         <file.encoding>UTF-8</file.encoding>
                         <org.eclipse.emf.ecore.plugin.EcorePlugin.doNotLoadResourcesPlugin>true</org.eclipse.emf.ecore.plugin.EcorePlugin.doNotLoadResourcesPlugin>
                         <headless.startup>true</headless.startup>

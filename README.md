@@ -20,10 +20,10 @@ Typical use cases:
 
 ## Supported features and examples of usage
 
-* Use a console version of oomph installer; you can download it either from [Standalone Oomph console installer](https://search.maven.org/search?q=a:org.eclipse.oomph.console.product) (choose the appropriate download for your target platform) or with mvn command. This eclipse installer is provided with `org.eclipse.oomph.console.application` application to handle command line installations:
+* Use a console version of Oomph installer; you can download it either from [Standalone Oomph console installer](https://search.maven.org/search?q=a:org.eclipse.oomph.console.product) (choose the appropriate download for your target platform) or with mvn command. This eclipse installer is provided with `org.eclipse.oomph.console.application` application to handle command line installations:
 
   ```bash
-  # Check oomph console version
+  # Check Oomph console version
   # Linux
   mvn org.apache.maven.plugins:maven-dependency-plugin:3.3.0:unpack -Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:LATEST:tar.gz:linux.gtk.x86_64 -DoutputDirectory=./ -Dproject.basedir=./
   # MacOS x86_64
@@ -60,16 +60,14 @@ Typical use cases:
     -Doomph.installation.location="$PWD/ide" \
     -Doomph.product.id="epp.package.java" \
     -Doomph.project.id="swtbot" \
-    -Doomph.workspace.location="$PWD/workspace" \
-    -Dsetup.p2.agent="$HOME/.p2"
+    -Doomph.workspace.location="$PWD/workspace"
   
   # Install "Model Workflow Engine" over "Eclipse IDE for Java Developers"
   ./eclipse-inst -nosplash -application org.eclipse.oomph.console.application -vmargs \
     -Doomph.installation.location="$PWD/ide" \
     -Doomph.product.id="epp.package.java" \
     -Doomph.project.id="MWE" \
-    -Doomph.workspace.location="$PWD/workspace" \
-    -Dsetup.p2.agent="$HOME/.p2"
+    -Doomph.workspace.location="$PWD/workspace"
   ```
 
 * Install multiple projects over product, ex.:
@@ -81,7 +79,7 @@ Typical use cases:
     -Doomph.product.id="epp.package.java" \
     -Doomph.project.id="swtbot,birt,MWE" \
     -Doomph.workspace.location="$PWD/workspace" \
-    -Dsetup.p2.agent="$HOME/.p2"
+    -Doomph.installer.layout="text"
   ```
 
 * Install product and project from [custom setup model](./org.eclipse.oomph.console.product/setups), ex.:
@@ -95,7 +93,17 @@ Typical use cases:
     -Doomph.product.id="epp.package.java" \
     -Doomph.project.id="bash.editor" \
     -Doomph.workspace.location="$PWD/workspace" \
-    -Dsetup.p2.agent="$HOME/.p2" \
+    -Doomph.installer.verbose=true
+  ```
+
+* Install product and project from Oomph [Configuration][4], ex.:
+
+  ```bash
+  # Install "Business Intelligence Reporting Tool" over "Eclipse IDE for Eclipse Committers" from Configuration
+  ./eclipse-inst -nosplash -application org.eclipse.oomph.console.application -vmargs \
+    -Doomph.configuration.setups="https://raw.githubusercontent.com/eclipse/birt/master/build/org.eclipse.birt.releng/BIRTConfiguration.setup" \
+    -Doomph.installation.location="$PWD/ide" \
+    -Doomph.workspace.location="$PWD/workspace" \
     -Doomph.installer.verbose=true
   ```
 
@@ -152,7 +160,7 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
   -Doomph.project.stream="master"
   ```
 
-* `oomph.installer.layout` (string, default `progress`) - output layout mode, can be `progress` or `text`, ex.:
+* `oomph.installer.layout` (**since 1.0.3**, string, default `progress`) - output layout mode, can be "`progress`" or "`text`", ex.:
 
   ```bash
   -Doomph.installer.layout=text
@@ -164,7 +172,7 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
   -Doomph.installer.verbose=true
   ```
 
-* `oomph.installer.ssl.insecure` (boolean, default `false`) - disable check of public key certificates (e.g. self-signed ones), ex.:
+* `oomph.installer.ssl.insecure` (**since 1.0.2**, boolean, default `false`) - disable check of public key certificates (e.g. self-signed ones), ex.:
 
   ```bash
   -Doomph.installer.ssl.insecure=true
@@ -185,7 +193,7 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
   -Doomph.redirection.setups="index:/->$PWD/my-custom-setups/"
   ```
 
-* `oomph.redirection.*` overrides - location of additional setup model (also contain org.eclipse.setup file), uses for override basic setup model location, ex.:
+* `oomph.redirection.<some_id>` overrides - location of additional setup model (also contain org.eclipse.setup file), uses for override basic setup model location, ex.:
 
   ```bash
   # Basic setup model location
@@ -194,18 +202,29 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
   -Doomph.redirection.setupsDir="index:/->$PWD/my-custom-setups/"
   ```
 
-* `oomph.redirection.*` additions - location of additional setup model (without org.eclipse.setup file), uses to provides you own setup without altering eclipse oomph base setup (redirect empty redirectable.products.setup and/or redirectable.projects.setup from default config to you own definitions):
+* `oomph.redirection.<some_id>` additions - location of additional setup model (without org.eclipse.setup file), uses to provides you own setup without altering eclipse Oomph base setup (redirect empty redirectable.products.setup and/or redirectable.projects.setup from default config to you own definitions):
 
   ```bash
   # Basic setup model location
   -Doomph.redirection.setups="index:/->http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/"
   # Additional products setup models location
-  -Doomph.redirection.productsDir="index:/redirectable.products.setup->$PWD/my-custom-products/products.setup"
+  -Doomph.redirection.productsCatalog="index:/redirectable.products.setup->$PWD/my-custom-products/products.setup"
   # Additional projects setup models location
-  -Doomph.redirection.projectsDir="index:/redirectable.projects.setup->$PWD/my-custom-projects/projects.setup"
+  -Doomph.redirection.projectsCatalog="index:/redirectable.projects.setup->$PWD/my-custom-projects/projects.setup"
   ```
 
-* `setup.p2.agent` (string, default null) - directory location of shared pool for features/plugins, ex.:
+* `oomph.configuration.setups` (**since 1.0.3**, string, default `null`) - location of Oomph [Configuration][4], ex.:
+
+  ```bash
+  # From file
+  -Doomph.configuration.setups="$PWD/my-custom-setups/Configuration.setup"
+  # From URL
+  -Doomph.configuration.setups="https://<hostname>/setups/Configuration.setup"
+  ```
+
+  > **_NOTE:_** When combined with `oomph.redirection.<some_id>` product\projects must be from the same setups model as specified in Configuration for the `productVersion` or `stream`.
+
+* `setup.p2.agent` (string, default `null`) - directory location of shared pool for features/plugins, ex.:
 
   ```bash
   # From command line
@@ -245,7 +264,7 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
 [1]: https://git.eclipse.org/r/c/oomph/org.eclipse.oomph/+/66353
 [2]: https://git.eclipse.org/c/oomph/org.eclipse.oomph.git/tree/
 [3]: https://eclipsesource.com/blogs/tutorials/oomph-basic-tutorial/
-[4]: https://wiki.eclipse.org/Eclipse_Oomph_Authoring#Creating_a_Configuration
+[4]: https://wiki.eclipse.org/Eclipse_Oomph_Authoring
 [5]: https://wiki.eclipse.org/Oomph_Targlets
 [6]: https://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/org.eclipse.products.setup
 [7]: https://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/org.eclipse.projects.setup

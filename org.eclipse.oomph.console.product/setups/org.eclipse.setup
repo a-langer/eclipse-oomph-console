@@ -6,7 +6,7 @@
     name="index"
     label="index">
   <productCatalog
-      href="products.setup#/"/>
+      href="ProductCatalog.setup#/"/>
   <projectCatalog
-      href="projects.setup#/" />
+      href="ProjectCatalog.setup#/" />
 </setup:Index>

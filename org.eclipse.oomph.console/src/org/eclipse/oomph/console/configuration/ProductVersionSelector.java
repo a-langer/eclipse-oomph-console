@@ -1,5 +1,6 @@
 package org.eclipse.oomph.console.configuration;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -7,15 +8,19 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.oomph.console.core.parameters.Parameters;
+import org.eclipse.oomph.setup.Configuration;
 import org.eclipse.oomph.setup.Product;
 import org.eclipse.oomph.setup.ProductVersion;
 import org.eclipse.oomph.setup.Project;
 import org.eclipse.oomph.setup.SetupPackage;
 import org.eclipse.oomph.setup.Stream;
+import org.eclipse.oomph.util.StringUtil;
 
 @SuppressWarnings("restriction")
 public class ProductVersionSelector {
@@ -101,6 +106,20 @@ public class ProductVersionSelector {
 
     public ProductVersion selectProductVersion(Product product, String versionId) throws NotFoundException {
         return select(product, versionId);
+    }
+
+    // See org.eclipse.oomph.setup.ui.wizards.SetupWizard#getConfiguration
+    public Configuration selectConfiguration() throws NotFoundException {
+        if (StringUtil.isEmpty(Parameters.CONFIGURATION))
+            return null;
+        URI uri = resourceSet.getURIConverter().normalize(URI.createURI(Parameters.CONFIGURATION));
+        Resource resource = resourceSet.createResource(uri);
+        try {
+            resource.load(resourceSet.getLoadOptions());
+        } catch (IOException e) {
+            throw new NotFoundException(e);
+        }
+        return (Configuration) EcoreUtil.getObjectByType(resource.getContents(), SetupPackage.Literals.CONFIGURATION);
     }
 
     @SuppressWarnings("unchecked")
