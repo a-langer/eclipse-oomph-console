@@ -5,7 +5,8 @@
     <!-- Oomph setup installer dependencies -->
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
       <unit id="org.eclipse.oomph.setup.installer.feature.group" version="0.0.0"/>
-      <repository location="https://download.eclipse.org/oomph/products/repository"/>
+      <!-- <repository location="https://download.eclipse.org/oomph/products/repository"/> -->
+      <repository location="https://download.eclipse.org/oomph/drops/release/1.28.0/products/repository/"/>
     </location>
     <!-- Fixing missing requirement for jitpack.io -->
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">

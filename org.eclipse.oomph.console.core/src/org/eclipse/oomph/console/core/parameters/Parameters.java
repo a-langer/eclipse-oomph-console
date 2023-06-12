@@ -43,9 +43,10 @@ public class Parameters {
     public static final String INSTALLATION_PRODUCT_FOLDER = System.getProperty(INSTALLATION_PRODUCT_FOLDER_ID);
     public static final String WORKSPACE_LOCATION = System.getProperty(WORKSPACE_LOCATION_ID,
             INSTALLATION_LOCATION);
-    public static final String SETUP_P2_AGENT = System.getProperty(SETUP_P2_AGENT_ID);
+    public static final String SETUP_P2_AGENT = "@none".equals(System.getProperty(SETUP_P2_AGENT_ID)) ? null
+            : System.getProperty(SETUP_P2_AGENT_ID);
     public static final boolean SETUP_OFFLINE = Boolean
-            .parseBoolean(System.getProperty(SetupProperties.PROP_SETUP_OFFLINE, "true"));
+            .parseBoolean(System.getProperty(SetupProperties.PROP_SETUP_OFFLINE, "false"));
     public static final boolean SETUP_MIRRORS = Boolean
             .parseBoolean(System.getProperty(SetupProperties.PROP_SETUP_MIRRORS, "false"));
 }

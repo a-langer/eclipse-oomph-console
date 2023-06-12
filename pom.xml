@@ -32,14 +32,6 @@
         <developerConnection>git@github.com:a-langer/eclipse-oomph-console.git</developerConnection>
         <url>https://github.com/a-langer/eclipse-oomph-console</url>
     </scm>
-    
-    <repositories>
-        <repository>
-            <id>eclipse-release</id>
-            <url>https://download.eclipse.org/releases/latest</url>
-            <layout>p2</layout>
-        </repository>
-    </repositories>
 
     <distributionManagement>
         <snapshotRepository>

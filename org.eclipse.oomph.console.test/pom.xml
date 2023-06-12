@@ -68,6 +68,7 @@
                         <oomph.p2.repository.retry>0</oomph.p2.repository.retry>
                         <eclipse.p2.max.threads>8</eclipse.p2.max.threads>
                         <eclipse.p2.mirrors>false</eclipse.p2.mirrors>
+                        <oomph.setup.offline>false</oomph.setup.offline>
                         <eclipse.p2.unsignedPolicy>allow</eclipse.p2.unsignedPolicy>
                         <oomph.p2.flush>false</oomph.p2.flush>
                         <oomph.p2.repository.fail.permanently>true</oomph.p2.repository.fail.permanently>
