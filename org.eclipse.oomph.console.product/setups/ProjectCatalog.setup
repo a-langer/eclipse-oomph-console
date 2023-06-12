@@ -83,11 +83,11 @@
       <setupTask
           xsi:type="setup:VariableTask"
           name="oomph.console.updatesite"
-          defaultValue="https://alanger.jfrog.io/artifactory/eclipse-oomph-console/">
+          defaultValue="https://a-langer.github.io/eclipse-oomph-console-site/">
       </setupTask>
       <setupTask
           xsi:type="setup:RedirectionTask"
-          sourceURL="https://alanger.jfrog.io/artifactory/eclipse-oomph-console/"
+          sourceURL="https://a-langer.github.io/eclipse-oomph-console-site/"
           targetURL="${oomph.console.updatesite}"/>
       <description>Change Update Site, ex.: -Doomph.console.updatesite=https://mysite/eclipse-oomph-console/</description>
     </setupTask>
@@ -102,7 +102,7 @@
             name="org.eclipse.oomph.console.feature.feature.group"
             versionRange="0.0.0"/>
         <repository
-            url="https://alanger.jfrog.io/artifactory/eclipse-oomph-console/"/>
+            url="https://a-langer.github.io/eclipse-oomph-console-site/"/>
       </setupTask>
     </setupTask>
     <stream name="master" label="master"/>
