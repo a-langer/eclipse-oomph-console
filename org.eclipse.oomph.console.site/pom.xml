@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.github.a-langer</groupId>
         <artifactId>org.eclipse.oomph.console.root</artifactId>
-        <version>1.0.3-SNAPSHOT</version>
+        <version>1.0.3</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>org.eclipse.oomph.console.site</artifactId>
