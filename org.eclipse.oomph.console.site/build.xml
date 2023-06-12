@@ -1,54 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:unless="ant:unless" xmlns:if="ant:if">
-    <taskdef name="http" classname="org.missinglink.ant.task.http.HttpClientTask"/>
-    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
-    <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties" />
+    <taskdef resource="net/sf/antcontrib/antlib.xml" />
 
-    <target name="http-delete">
-        <http url="${artifactory.url}" 
-            method="DELETE" 
-            printRequest="false" 
-            printResponse="false" 
-            printRequestHeaders="false" 
-            printResponseHeaders="false" 
-            expected="204" 
-            failOnUnexpected="true">
-            <headers>
-                <header name="X-JFrog-Art-Api" value="${password}"/>
-            </headers>
-        </http>
-    </target>
+    <!-- https://github.com/FrancisVarga/ant-git-macros/blob/master/git-ant.xml -->
+    <macrodef name="git">
+        <attribute name="command" />
+        <attribute name="options" default="" />
+        <attribute name="dir" default="" />
+        <attribute name="outputproperty" default="" xmlns:example="git.output" />
+        <attribute name="failerror" default="false" />
+        <element name="args" optional="true" />
+        <sequential>
+            <echo message="git dir @{dir}" />
+            <echo message="git @{command}" />
+            <exec if:blank="@{outputproperty}" taskname="git" executable="git" dir="@{dir}" failonerror="@{failerror}">
+                <arg line="@{command} @{options}" />
+                <args />
+            </exec>
+            <exec unless:blank="@{outputproperty}" taskname="git" executable="git" dir="@{dir}" outputproperty="@{outputproperty}" failonerror="@{failerror}">
+                <arg line="@{command} @{options}" />
+                <args />
+            </exec>
+        </sequential>
+    </macrodef>
 
-    <target name="http-put">
-        <http url="${artifactory.url}/${item}" 
-            method="PUT" 
-            printRequest="false" 
-            printResponse="false" 
-            printRequestHeaders="false" 
-            printResponseHeaders="false" 
-            expected="201" 
-            failOnUnexpected="true">
-            <headers>
-                <header name="X-JFrog-Art-Api" value="${password}"/>
-            </headers>
-            <entity file="${file}" binary="true"/>
-        </http>
-    </target>
+    <macrodef name="git-push">
+        <attribute name="remote" default="origin" />
+        <attribute name="dir" />
+        <attribute name="options" default="" />
+        <attribute name="localRef" />
+        <attribute name="remoteRef" />
+        <attribute name="failerror" default="false" />
+        <sequential>
+            <git command="push" dir="@{dir}" options="@{options}" failerror="@{failerror}">
+                <args>
+                    <arg value="@{remote}" />
+                    <arg value="@{localRef}:@{remoteRef}" />
+                </args>
+            </git>
+        </sequential>
+    </macrodef>
 
-    <target name="p2-files" depends="http-delete">
-        <for param="file">
-            <path>
-                <fileset dir="${project.basedir}/target/repository" includes="**/*"/>
-            </path>
-            <sequential>
-                <propertyregex override="yes" property="item" input="@{file}" 
-                    regexp=".*${project.basedir}/target/repository/" replace=""/>
-                <antcall target="http-put">
-                    <param name="item" value="${item}"/>
-                    <param name="file" value="@{file}"/>
-                </antcall>
-            </sequential>
-        </for>
-    </target>
+    <macrodef name="git-push-to-branch">
+        <attribute name="branch" />
+        <attribute name="remoteRepositoryName" />
+        <attribute name="dir" />
+        <attribute name="options" default="" />
+        <attribute name="failerror" default="false" />
+        <sequential>
+            <git command="push" dir="@{dir}" options="@{options}" failerror="@{failerror}">
+                <args>
+                    <arg value="@{remoteRepositoryName}" />
+                    <arg value="@{branch}" />
+                </args>
+            </git>
+        </sequential>
+    </macrodef>
 
+    <macrodef name="git-commit-with-message">
+        <attribute name="message" />
+        <attribute name="dir" />
+        <attribute name="options" default="" />
+        <attribute name="failerror" default="false" />
+        <sequential>
+            <git command="commit" dir="@{dir}" options="@{options}" failerror="@{failerror}">
+                <args>
+                    <arg value="-m @{message}" />
+                </args>
+            </git>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="git-add">
+        <attribute name="file" />
+        <attribute name="dir" />
+        <attribute name="options" default="" />
+        <attribute name="failerror" default="false" />
+        <sequential>
+            <git command="add" dir="@{dir}" options="@{options}" failerror="@{failerror}">
+                <args>
+                    <arg value="@{file}" />
+                </args>
+            </git>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="git-tag">
+        <attribute name="tagName" />
+        <attribute name="dir" />
+        <attribute name="options" default="" />
+        <attribute name="failerror" default="false" />
+        <sequential>
+            <git command="tag" dir="@{dir}" options="@{options}" failerror="@{failerror}">
+                <args>
+                    <arg value="@{tagName}" />
+                </args>
+            </git>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="git-clone">
+        <attribute name="repository" />
+        <attribute name="dest" default="" />
+        <attribute name="dir" />
+        <attribute name="options" default="" />
+        <attribute name="failerror" default="false" />
+        <sequential>
+            <git command="clone" dir="@{dir}" options="@{options}" failerror="@{failerror}">
+                <args>
+                    <arg value="@{repository}" />
+                    <arg value="@{dest}" />
+                </args>
+            </git>
+        </sequential>
+    </macrodef>
+
+    <!-- Deploy P2 site to GitHub -->
+    <property name="site.url" value="https://a-langer.github.io/eclipse-oomph-console-site/" />
+    <property name="git.repository" value="https://github.com/a-langer/eclipse-oomph-console-site.git" />
+    <property name="git.dest" value="${project.build.directory}/eclipse-oomph-console-site" />
+    <condition property="version.isSnapshot" else="false">
+        <contains string="${project.version}" substring="-SNAPSHOT" />
+    </condition>
+    <echo>Version ${project.version} is snapshot: ${version.isSnapshot}</echo>
+
+    <git-clone repository="${git.repository}" dest="${git.dest}" dir="${project.build.directory}" />
+
+    <git command="rm -rf ." dir="${git.dest}" />
+
+    <copy todir="${git.dest}" overwrite="true">
+        <fileset dir="${project.build.directory}/repository" includes="**/*" />
+    </copy>
+
+    <copy file="${basedir}/README.md" tofile="${git.dest}/README.md" overwrite="true">
+        <filterchain>
+            <replacetokens begintoken="&lt;" endtoken="&gt;">
+                <token key="projectName" value="${project.name}" />
+                <token key="projectVersion" value="${project.version}" />
+                <token key="siteUrl" value="${site.url}" />
+                <token key="gitRepository" value="${git.repository}" />
+            </replacetokens>
+        </filterchain>
+    </copy>
+
+    <copy file="${basedir}/_config.yml" tofile="${git.dest}/_config.yml" overwrite="true" />
+    <copy file="${basedir}/category.xml" tofile="${git.dest}/category.xml" overwrite="true" />
+
+    <git-add file="." dir="${git.dest}" />
+
+    <git-commit-with-message message="Added version ${project.version}" dir="${git.dest}" />
+
+    <git-tag tagname="${project.version}" dir="${git.dest}" />
+
+    <git command="status" dir="${git.dest}" outputproperty="git.status" />
+    <echo>${git.status}</echo>
+
+    <if unless:true="${version.isSnapshot}">
+        <contains string="${git.status}" substring="Your branch is ahead" />
+        <then>
+            <echo unless:true="${push.skip}">Push P2 site</echo>
+            <echo if:true="${push.skip}">Skip push P2 site</echo>
+            <git-push-to-branch unless:true="${push.skip}" remoterepositoryname="origin" branch="main" options="--tags" dir="${git.dest}" />
+        </then>
+        <else>
+            <echo>No new files</echo>
+        </else>
+    </if>
 </project>
