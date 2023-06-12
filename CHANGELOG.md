@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Changes, might expect in upcoming releases.
 
+## [1.0.3][1.0.3] - 2023-06-13
+
+Release of version [1.0.3](https://search.maven.org/artifact/com.github.a-langer/org.eclipse.oomph.console.product/1.0.3/eclipse-repository):
+
+- [win32.x86_64.zip](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.3/org.eclipse.oomph.console.product-1.0.3-win32.win32.x86_64.zip)
+- [linux.gtk.x86_64.tar.gz](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.3/org.eclipse.oomph.console.product-1.0.3-linux.gtk.x86_64.tar.gz)
+- [macosx.cocoa.x86_64.tar](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.3/org.eclipse.oomph.console.product-1.0.3-macosx.cocoa.x86_64.tar.gz)
+
 ### Added
 
 - [Added changelog](https://github.com/a-langer/eclipse-oomph-console/commit/37a6fd76315c083b3baa7f857d45a48e57ff22b2)
@@ -16,6 +24,11 @@ Changes, might expect in upcoming releases.
 - [Added oomph.console project](https://github.com/a-langer/eclipse-oomph-console/commit/f83a60c4bfb9aca090ba19dc9c1b69972e6ecf33)
 - [Added empty project](https://github.com/a-langer/eclipse-oomph-console/commit/e7f14090c51ed8f5b2d4105771ce2b27a4df0d91)
 - [Added oomph.configuration.setups](https://github.com/a-langer/eclipse-oomph-console/commit/24fd4d5047251ccafce67df234f2653e0a1e1462), issue [#6](https://github.com/a-langer/eclipse-oomph-console/issues/6)
+
+### Changed
+
+- [Moved p2 repository to GitHub](https://github.com/a-langer/eclipse-oomph-console/commit/867aca05872779af6b1e528117b21102084d1889)
+- [Target for oomph 1.28.0](https://github.com/a-langer/eclipse-oomph-console/commit/abcf433080d956e6157278b6bcfdcc59900a37d2)
 
 ### Removed
 
@@ -71,8 +84,8 @@ Release of version [1.0.0](https://search.maven.org/artifact/com.github.a-langer
 
 - First release version [1.0.0][1.0.0]
 
-[all]: https://search.maven.org/artifact/com.github.a-langer/org.eclipse.oomph.console.product
-[unreleased]: https://github.com/a-langer/eclipse-oomph-console/compare/1.0.2...HEAD
+[unreleased]: https://github.com/a-langer/eclipse-oomph-console/compare/1.0.3...HEAD
 [1.0.0]: https://github.com/a-langer/eclipse-oomph-console/compare/b27b87cdc9a78a977e3d3215438aed6fe1777039...1811936dbc261e77a48fe29662b8cfdbf9d60b91
 [1.0.1]: https://github.com/a-langer/eclipse-oomph-console/compare/1.0.0...1.0.1
 [1.0.2]: https://github.com/a-langer/eclipse-oomph-console/compare/1.0.1...1.0.2
+[1.0.3]: https://github.com/a-langer/eclipse-oomph-console/compare/1.0.2...1.0.3
