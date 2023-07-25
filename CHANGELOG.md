@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Changes, might expect in upcoming releases.
 
+### Changed
+
+- [Downgrade to JRE 11](https://github.com/a-langer/eclipse-oomph-console/commit/278be03e59340b1ec6743217d81a6377a54dfc0b)
+- [Changed update site url](https://github.com/a-langer/eclipse-oomph-console/commit/3d7e13af689c84aae00ee6e7c935ad32daf3dc58)
+
 ## [1.0.3][1.0.3] - 2023-06-13
 
 Release of version [1.0.3](https://search.maven.org/artifact/com.github.a-langer/org.eclipse.oomph.console.product/1.0.3/eclipse-repository):
