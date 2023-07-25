@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Changes, might expect in upcoming releases.
 
+## [1.0.4][1.0.4] - 2023-07-25
+
+Release of version [1.0.4](https://search.maven.org/artifact/com.github.a-langer/org.eclipse.oomph.console.product/1.0.4/eclipse-repository):
+
+- [win32.x86_64.zip](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.4/org.eclipse.oomph.console.product-1.0.4-win32.win32.x86_64.zip)
+- [linux.gtk.x86_64.tar.gz](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.4/org.eclipse.oomph.console.product-1.0.4-linux.gtk.x86_64.tar.gz)
+- [macosx.cocoa.x86_64.tar](https://search.maven.org/remotecontent?filepath=com/github/a-langer/org.eclipse.oomph.console.product/1.0.4/org.eclipse.oomph.console.product-1.0.4-macosx.cocoa.x86_64.tar.gz)
+
 ### Changed
 
 - [Downgrade to JRE 11](https://github.com/a-langer/eclipse-oomph-console/commit/278be03e59340b1ec6743217d81a6377a54dfc0b)
@@ -89,8 +97,9 @@ Release of version [1.0.0](https://search.maven.org/artifact/com.github.a-langer
 
 - First release version [1.0.0][1.0.0]
 
-[unreleased]: https://github.com/a-langer/eclipse-oomph-console/compare/1.0.3...HEAD
+[unreleased]: https://github.com/a-langer/eclipse-oomph-console/compare/1.0.4...HEAD
 [1.0.0]: https://github.com/a-langer/eclipse-oomph-console/compare/b27b87cdc9a78a977e3d3215438aed6fe1777039...1811936dbc261e77a48fe29662b8cfdbf9d60b91
 [1.0.1]: https://github.com/a-langer/eclipse-oomph-console/compare/1.0.0...1.0.1
 [1.0.2]: https://github.com/a-langer/eclipse-oomph-console/compare/1.0.1...1.0.2
 [1.0.3]: https://github.com/a-langer/eclipse-oomph-console/compare/1.0.2...1.0.3
+[1.0.4]: https://github.com/a-langer/eclipse-oomph-console/compare/1.0.3...1.0.4
