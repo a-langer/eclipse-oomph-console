@@ -30,7 +30,7 @@ Typical use cases:
   mvn org.apache.maven.plugins:maven-dependency-plugin:3.3.0:unpack -Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:LATEST:tar.gz:macosx.cocoa.x86_64 -DoutputDirectory=./ -Dproject.basedir=./
   # Windows (powershell)
   mvn "org.apache.maven.plugins:maven-dependency-plugin:3.3.0:unpack" "-Dartifact=com.github.a-langer:org.eclipse.oomph.console.product:LATEST:zip:win32.win32.x86_64" "-DoutputDirectory=./" "-Dproject.basedir=./"
-  
+
   # Linux/MacOS binary
   ./eclipse-installer/eclipse-inst
   # Windows binary
@@ -42,12 +42,12 @@ Typical use cases:
 
   ```bash
   # Install "Eclipse IDE for Java Developers"
-  ./eclipse-inst -nosplash -application org.eclipse.oomph.console.application -vmargs \
+  ./eclipse-inst -vmargs \
     -Doomph.installation.location="$PWD/ide" \
     -Doomph.product.id="epp.package.java"
-  
+
   # Install "Eclipse IDE for PHP Developers"
-  ./eclipse-inst -nosplash -application org.eclipse.oomph.console.application -vmargs \
+  ./eclipse-inst -vmargs \
     -Doomph.installation.location="$PWD/ide" \
     -Doomph.product.id="epp.package.php"
   ```
@@ -56,14 +56,14 @@ Typical use cases:
 
   ```bash
   # Install "SWTBot testing tool" over "Eclipse IDE for Java Developers"
-  ./eclipse-inst -nosplash -application org.eclipse.oomph.console.application -vmargs \
+  ./eclipse-inst -vmargs \
     -Doomph.installation.location="$PWD/ide" \
     -Doomph.product.id="epp.package.java" \
     -Doomph.project.id="swtbot" \
     -Doomph.workspace.location="$PWD/workspace"
-  
+
   # Install "Model Workflow Engine" over "Eclipse IDE for Java Developers"
-  ./eclipse-inst -nosplash -application org.eclipse.oomph.console.application -vmargs \
+  ./eclipse-inst -vmargs \
     -Doomph.installation.location="$PWD/ide" \
     -Doomph.product.id="epp.package.java" \
     -Doomph.project.id="MWE" \
@@ -74,7 +74,7 @@ Typical use cases:
 
   ```bash
   # Install "SWTBot testing tool", "Business Intelligence Reporting Tool" and "Model Workflow Engine" over "Eclipse IDE for Java Developers"
-  ./eclipse-inst -nosplash -application org.eclipse.oomph.console.application -vmargs \
+  ./eclipse-inst -vmargs \
     -Doomph.installation.location="$PWD/ide" \
     -Doomph.product.id="epp.package.java" \
     -Doomph.project.id="swtbot,birt,MWE" \
@@ -86,7 +86,7 @@ Typical use cases:
 
   ```bash
   # Install "Bash Editor" over "Eclipse IDE for Java Developers" from setup model located in directory "$PWD/setups/"
-  ./eclipse-inst -nosplash -application org.eclipse.oomph.console.application -vmargs \
+  ./eclipse-inst -vmargs \
     -Doomph.redirection.setups="index:/->http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/" \
     -Doomph.redirection.setupsDir="index:/->$PWD/setups/" \
     -Doomph.installation.location="$PWD/ide" \
@@ -100,7 +100,7 @@ Typical use cases:
 
   ```bash
   # Install "Business Intelligence Reporting Tool" over "Eclipse IDE for Eclipse Committers" from Configuration
-  ./eclipse-inst -nosplash -application org.eclipse.oomph.console.application -vmargs \
+  ./eclipse-inst -vmargs \
     -Doomph.configuration.setups="https://raw.githubusercontent.com/eclipse/birt/master/build/org.eclipse.birt.releng/BIRTConfiguration.setup" \
     -Doomph.installation.location="$PWD/ide" \
     -Doomph.workspace.location="$PWD/workspace" \
@@ -244,8 +244,8 @@ The Console Oomph Installer settings (see also [Eclipse runtime options](https:/
 * `<Any jvm options>` - any jvm options will be bind to setup model variables, ex.:
 
   ```bash
-  -Dmy.project.option1="my-value1" 
-  -Dmy.project.option2="my-value2" 
+  -Dmy.project.option1="my-value1"
+  -Dmy.project.option2="my-value2"
   -Dmy.project.option3="my-value3"
   ```
 

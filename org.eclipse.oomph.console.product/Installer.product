@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Eclipse Console Installer" uid="org.eclipse.oomph.console.product" id="org.eclipse.oomph.setup.installer.product" version="1.0.5.qualifier" useFeatures="true" includeLaunchers="true" autoIncludeRequirements="true">
-
+<product name="Eclipse Console Installer" uid="org.eclipse.oomph.console.product" id="org.eclipse.oomph.setup.installer.product" application="org.eclipse.oomph.console.application" version="1.0.5.qualifier" type="features" includeLaunchers="true" autoIncludeRequirements="true">
 
    <configIni use="">
    </configIni>
@@ -17,6 +16,10 @@ openFile
 Eclipse Installer
 -data
 @noDefault
+-nosplash
+--launcher.suppressErrors
+-application
+org.eclipse.oomph.console.application
       </programArgs>
       <vmArgs>-Xms256M
 -Xmx2048M
@@ -194,7 +197,7 @@ United States, other countries, or both.
    <features>
       <feature id="org.eclipse.oomph.setup.installer"/>
       <feature id="org.eclipse.oomph.console.feature"/>
-<!-- 
+<!--
       <feature id="org.eclipse.justj.openjdk.hotspot.jre.minimal.stripped"/>
 -->
    </features>
