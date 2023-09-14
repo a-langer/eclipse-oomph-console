@@ -40,3 +40,4 @@ Corel Auto-Preserve/
 *_SAVE*
 *.versionsBackup
 .metadata
+.tycho-consumer-pom.xml
