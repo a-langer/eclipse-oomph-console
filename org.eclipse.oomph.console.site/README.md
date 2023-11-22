@@ -10,7 +10,7 @@ Navigate to [https://a-langer.github.io/eclipse-oomph-console-site][0] to access
 
 ## How to install Oomph Console Plugin?
 
-Drag and Drop installation: [![Drag to your running Eclipse workspace.](https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.png)](https://marketplace.eclipse.org/marketplace-client-intro?mpc_install=5544670 "Drag to your running Eclipse workspace.")
+Drag and Drop installation: [![Drag to your running Eclipse workspace.](https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.svg)](https://marketplace.eclipse.org/marketplace-client-intro?mpc_install=5544670 "Drag to your running Eclipse workspace.")
 
 _If you have currently the "Eclipse" Oomph Console Plugin installed, it is recommended to uninstall that plug-in first and remove the corresponding update site from your Eclipse installation._
 
